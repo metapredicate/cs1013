@@ -1,5 +1,5 @@
 import java.util.Scanner;
-class DateOfSale extends PropertyEntry
+class DateOfSale
 {
   int year;
   int month;

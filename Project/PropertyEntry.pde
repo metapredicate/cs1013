@@ -1,6 +1,6 @@
 class PropertyEntry
 {
-  int price, numName;
+  String price, numName;
   String postcode, dateOfSale, street, locality, town, district, county, propertyType, oldOrNew;
 
   
@@ -8,22 +8,20 @@ class PropertyEntry
                  String oldOrNew, String numName, String street,
                  String locality, String town, String district, String county)
    {
-       this.dateOfSale = dateOfSale;
-       this.postcode = postcode;
-       this.propertyType = propertyType;
-       this.oldOrNew = oldOrNew;
-       this.street = street;
-       this.locality = locality;
-       this.town = town;
-       this.district = district;
-       this.county = county;
-       
-       this.price =  Integer.parseInt(price);
-       this.numName = Integer.parseInt(numName);
-       
+       this.dateOfSale = ((dateOfSale == null)? "" : dateOfSale);
+       this.postcode = ((postcode == null)? "" : postcode);
+       this.propertyType = ((propertyType == null)? "" : propertyType);
+       this.oldOrNew = ((oldOrNew == null)? "" : oldOrNew);
+       this.street = ((street == null)? "" : street);
+       this.locality = ((locality == null)? "" : locality);
+       this.town = ((town == null)? "" : town);
+       this.district = ((district == null)? "" : district);
+       this.county = ((county == null)? "" : county);
+       this.price = ((price == null)? "" : price);
+       this.numName = ((numName == null)? "" : numName);
    }
      
- int getNumName()
+ String getNumName()
  {
      return numName;  
  }
@@ -31,5 +29,10 @@ class PropertyEntry
  String getStreet()
  {
    return street;
+ }
+ 
+ String toString()
+ {
+   return ("" + dateOfSale + " " + postcode + " " + propertyType + " " + oldOrNew + " " + numName + " " + street + " " + locality + " " + town + " " + district + " " + county + " £" + price);
  }
 }
