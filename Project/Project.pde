@@ -57,6 +57,8 @@ void setup()
   barChart.setBarColour(color(200,0,200));
   color widgetColor = color(200, 50, 50);
   
+  graphScreen.addText( SCREENX / 2 - 50, SCREENY - 90, "Prices over time");
+  
   mainScreen.addWidget(SCREENX / 2 - 50, SCREENY / 2 - 15, 100, 30, "Graph", widgetColor, myFont, EVENT_GRAPH_BUTTON);
   
   currentScreen = mainScreen;
@@ -66,8 +68,6 @@ void draw()
 {
   background(255);
   currentScreen.draw();
-  
-  graphScreen.addText( 150, 550, "Prices over time");
   toolbar.draw();
 }
 

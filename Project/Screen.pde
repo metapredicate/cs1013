@@ -1,6 +1,9 @@
 
 class Screen
 {
+  private String graphLabel;
+  private int labelX, labelY;
+  
   private ArrayList widgetList, barChartList;
   color backgroundColor;
 
@@ -10,6 +13,9 @@ class Screen
 
     widgetList = new ArrayList();
     barChartList = new ArrayList();
+    graphLabel = "";
+    labelX = 0;
+    labelY = 0;
   }
 
   void draw()
@@ -26,6 +32,8 @@ class Screen
       BarChart aBarChart = (BarChart) barChartList.get(i);
       aBarChart.draw(SCREENX / 2 - 360, SCREENY / 2 - 240, 720, 480);
     }
+    fill(0);
+    text(graphLabel, labelX, labelY);
   }
 
   int getEvent()
@@ -55,8 +63,9 @@ class Screen
   
   void addText(int x, int y, String title)
   {
-    fill(0);
-    text(title, x, y); 
+    graphLabel = title;
+    labelX = x;
+    labelY = y;
   }
 
   void mouseMoved()
