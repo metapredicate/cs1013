@@ -52,6 +52,12 @@ class Screen
   {
     barChartList.add(barChart);
   }
+  
+  void addText(int x, int y, String title)
+  {
+    fill(0);
+    text(title, x, y); 
+  }
 
   void mouseMoved()
   {
