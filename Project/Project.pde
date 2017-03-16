@@ -29,11 +29,16 @@ void setup()
     println( db.getString("Name") );
   }
   db.query( "SELECT * FROM test" );
+  int maxValue=0;
   float [] temp = new float[NUMBER_OF_ENTRIES];
   for (int i=0; i<NUMBER_OF_ENTRIES; i++)
   {
     if (db.next()) {
       temp[i] = parseFloat(db.getString("price"));
+      if(temp[i]>maxValue) 
+      {
+        maxValue = int(temp[i]);
+      }
     }
   }
   barChart.setBarColour(color(200,80,80,150));
@@ -43,10 +48,13 @@ void setup()
   graphScreen = new Screen(255);
   
   BarChart barChart = new BarChart(this);
-  barChart.setData(new float[] {500, 300, 378, 189, 100});
+  barChart.setData(temp);
   
   graphScreen.addBarChart(barChart);
-  
+  barChart.setMinValue(0);
+  barChart.setMaxValue(maxValue);
+  barChart.showValueAxis(true);
+  barChart.setBarColour(color(200,0,200));
   color widgetColor = color(200, 50, 50);
   
   mainScreen.addWidget(SCREENX / 2 - 50, SCREENY / 2 - 15, 100, 30, "Graph", widgetColor, myFont, EVENT_GRAPH_BUTTON);
