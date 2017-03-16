@@ -7,7 +7,7 @@ SQLite db;
 BarChart barChart;
 Toolbar toolbar;
 
-Screen firstScreen, secondScreen, currentScreen;
+Screen mainScreen, graphScreen, currentScreen;
 
 void settings() 
 {
@@ -16,8 +16,8 @@ void settings()
 void setup() 
 {
   color toolbarColor = color(150, 150, 150); 
-  toolbar = new Toolbar(toolbarColor);
   myFont = loadFont("Serif.plain-15.vlw");
+  toolbar = new Toolbar(toolbarColor);
   barChart = new BarChart(this);
   db = new SQLite(this, "landdata.db");
   if (db.connect())
@@ -39,15 +39,19 @@ void setup()
   barChart.setBarColour(color(200,80,80,150));
   barChart.setData(temp);
   
-  firstScreen = new Screen(255);
-  secondScreen = new Screen(255);
-  
-  currentScreen = firstScreen;
+  mainScreen = new Screen(255);
+  graphScreen = new Screen(255);
   
   BarChart barChart = new BarChart(this);
   barChart.setData(new float[] {500, 300, 378, 189, 100});
   
-  firstScreen.addBarChart(barChart);
+  graphScreen.addBarChart(barChart);
+  
+  color widgetColor = color(200, 50, 50);
+  
+  mainScreen.addWidget(SCREENX / 2 - 50, SCREENY / 2 - 15, 100, 30, "Graph", widgetColor, myFont, EVENT_GRAPH_BUTTON);
+  
+  currentScreen = mainScreen;
 }
 
 void draw() 
@@ -55,4 +59,17 @@ void draw()
   background(255);
   currentScreen.draw();
   toolbar.draw();
+}
+
+void mousePressed()
+{
+ switch(currentScreen.getEvent())
+  {
+  case EVENT_GRAPH_BUTTON:
+    currentScreen = graphScreen;
+    break;
+  case EVENT_BACK_BUTTON:
+    currentScreen = mainScreen;
+    break;
+  }
 }
