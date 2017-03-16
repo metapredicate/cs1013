@@ -49,10 +49,9 @@ class Screen
     {
       Widget aWidget = (Widget) widgetList.get(i);
       event = aWidget.getEvent(mouseX, mouseY);
-      if (event != EVENT_NULL)
-        aWidget.setStrokeColor(color(255));
-      else
-        aWidget.setStrokeColor(color(0));
+     
+
+  
     }
   }
 }

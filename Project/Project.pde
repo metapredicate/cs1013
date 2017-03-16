@@ -1,35 +1,41 @@
-
+import org.gicentre.utils.stat.*;
+import de.bezier.data.sql.*;
 PFont myFont;
-String[] lines;
 PropertyEntry[] propertyArray;
+SQLite db;
+BarChart barChart;
 void settings() 
 {
   size(SCREENX, SCREENY);
 }
 void setup() 
 {
-  propertyArray = new PropertyEntry[NUMBER_OF_ENTRIES];
   myFont = loadFont("Serif.plain-15.vlw");
-  lines = loadStrings("pp-1k.csv");
-
-  for (int i = 0; i < lines.length; i++) 
+  barChart = new BarChart(this);
+  db = new SQLite(this, "landdata.db");
+  if (db.connect())
   {
-    String [] s = lines[i].split("\\s*,\\s*");
-    propertyArray[i] = new PropertyEntry(s[0], s[1], s[2], s[3], 
-       s[4], s[5], s[6], s[7], 
-       s[8], s[9], s[10] );
+    db.query( "SELECT name as \"Name\" FROM SQLITE_MASTER where type=\"table\"" );
   }
+  while (db.next())
+  {
+    println( db.getString("Name") );
+  }
+  db.query( "SELECT * FROM test" );
+  float [] temp = new float[NUMBER_OF_ENTRIES];
+  for (int i=0; i<NUMBER_OF_ENTRIES; i++)
+  {
+    if (db.next()) {
+      temp[i] = parseFloat(db.getString("price"));
+    }
+  }
+  barChart.setBarColour(color(200,80,80,150));
+  barChart.setData(temp);
   
-  for(int i = 0;(i < NUMBER_OF_ENTRIES - 1);i++)
-  {
-    System.out.println("" + propertyArray[i].toString());
-  }
 }
 
 void draw() 
 {
-  background(0);
-  textFont(myFont);
-  text("" + propertyArray[100].getNumName(), 100, 100);
-  text("" + propertyArray[100].getStreet(), 100, 130);
+  background(255);
+  barChart.draw(15, 15, width-30, height-30);
 }
