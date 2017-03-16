@@ -66,6 +66,8 @@ void draw()
 {
   background(255);
   currentScreen.draw();
+  
+  graphScreen.addText( 150, 550, "Prices over time");
   toolbar.draw();
 }
 
