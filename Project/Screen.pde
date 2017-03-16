@@ -24,7 +24,7 @@ class Screen
     for(int i = 0;(i < barChartList.size());i++)
     {
       BarChart aBarChart = (BarChart) barChartList.get(i);
-      aBarChart.draw(SCREENX - 100, SCREENY - 100, 50, 50);
+      aBarChart.draw(SCREENX / 2 - 175, SCREENY / 2 - 250, 350, 500);
     }
   }
 

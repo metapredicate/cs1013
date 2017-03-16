@@ -42,7 +42,7 @@ void setup()
   currentScreen = firstScreen;
   
   BarChart barChart = new BarChart(this);
-  barChart.setData(new float[] {0.76, 0.24, 0.39, 0.18, 0.20});
+  barChart.setData(new float[] {500, 300, 378, 189, 100});
   
   firstScreen.addBarChart(barChart);
 }
