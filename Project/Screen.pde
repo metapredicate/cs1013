@@ -3,7 +3,7 @@ class Screen
 {
   private String graphLabel;
   private int labelX, labelY;
-  
+
   private ArrayList widgetList, barChartList;
   color backgroundColor;
 
@@ -26,8 +26,8 @@ class Screen
       Widget aWidget = (Widget) widgetList.get(i);
       aWidget.draw();
     }
-    
-    for(int i = 0;(i < barChartList.size());i++)
+
+    for (int i = 0; (i < barChartList.size()); i++)
     {
       BarChart aBarChart = (BarChart) barChartList.get(i);
       aBarChart.draw(SCREENX / 2 - 360, SCREENY / 2 - 240, 720, 480);
@@ -55,12 +55,12 @@ class Screen
   {
     widgetList.add(new Widget(x, y, width, height, label, widgetColor, widgetFont, event));
   }
-  
+
   void addBarChart(BarChart barChart)
   {
     barChartList.add(barChart);
   }
-  
+
   void addText(int x, int y, String title)
   {
     graphLabel = title;
@@ -76,7 +76,7 @@ class Screen
     {
       Widget aWidget = (Widget) widgetList.get(i);
       event = aWidget.getEvent(mouseX, mouseY);
-      
+
       if (event != EVENT_NULL)
         aWidget.setStrokeColor(color(255));
       else

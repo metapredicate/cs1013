@@ -1,6 +1,8 @@
 import org.gicentre.utils.stat.*;
 import de.bezier.data.sql.*;
 
+ArrayList backList;
+
 PFont myFont;
 PropertyEntry[] propertyArray;
 SQLite db;
@@ -14,10 +16,50 @@ void settings()
   size(SCREENX, SCREENY);
 }
 void setup() 
-{
+{ 
+  backList = new ArrayList();
   color toolbarColor = color(150, 150, 150); 
   myFont = loadFont("Serif.plain-15.vlw");
   toolbar = new Toolbar(toolbarColor);
+
+  createGraphScreen();
+
+  mainScreen = new Screen(255);
+  color widgetColor = color(200, 50, 50);
+
+  mainScreen.addWidget(SCREENX / 2 - 50, SCREENY / 2 - 15, 100, 30, "Graph", widgetColor, myFont, EVENT_GRAPH_BUTTON);
+
+  currentScreen = mainScreen;
+  backList.add(currentScreen);
+}
+
+void draw() 
+{
+  background(255);
+  currentScreen.draw();
+  toolbar.draw();
+}
+
+void mousePressed()
+{
+  switch(currentScreen.getEvent())
+  {
+  case EVENT_GRAPH_BUTTON:
+    currentScreen = graphScreen;
+    backList.add(currentScreen);
+    break;
+  }
+  switch(toolbar.getEvent())
+  {
+  case EVENT_BACK_BUTTON: 
+    backList.remove(currentScreen);
+    currentScreen = (Screen) backList.get(backList.size() - 1);
+    break;
+  }
+}
+
+void createGraphScreen()
+{
   barChart = new BarChart(this);
   db = new SQLite(this, "landdata.db");
   if (db.connect())
@@ -35,53 +77,25 @@ void setup()
   {
     if (db.next()) {
       temp[i] = parseFloat(db.getString("price"));
-      if(temp[i]>maxValue) 
+      if (temp[i]>maxValue) 
       {
         maxValue = int(temp[i]);
       }
     }
   }
-  barChart.setBarColour(color(200,80,80,150));
+  barChart.setBarColour(color(200, 80, 80, 150));
   barChart.setData(temp);
-  
-  mainScreen = new Screen(255);
+
   graphScreen = new Screen(255);
-  
+
   BarChart barChart = new BarChart(this);
   barChart.setData(temp);
-  
+
   graphScreen.addBarChart(barChart);
   barChart.setMinValue(0);
   barChart.setMaxValue(maxValue);
   barChart.showValueAxis(true);
-  barChart.setBarColour(color(200,0,200));
-  color widgetColor = color(200, 50, 50);
-  
+  barChart.setBarColour(color(200, 0, 200));
+
   graphScreen.addText( SCREENX / 2 - 50, SCREENY - 90, "Prices over time");
-  
-  mainScreen.addWidget(SCREENX / 2 - 50, SCREENY / 2 - 15, 100, 30, "Graph", widgetColor, myFont, EVENT_GRAPH_BUTTON);
-  
-  currentScreen = mainScreen;
-}
-
-void draw() 
-{
-  background(255);
-  currentScreen.draw();
-  toolbar.draw();
-}
-
-void mousePressed()
-{
- switch(currentScreen.getEvent())
-  {
-  case EVENT_GRAPH_BUTTON:
-    currentScreen = graphScreen;
-    break;
-  }
-  switch(toolbar.getEvent())
-  {
-   case EVENT_BACK_BUTTON:  
-     currentScreen = mainScreen;
-  }
 }
