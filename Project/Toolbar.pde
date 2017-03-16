@@ -1,6 +1,5 @@
 class Toolbar
 {
-final int EVENT_BACK = 1;
 final int EVENT_DROP = 2;
 final int MARGIN = 2;
 final int TOOLBAR_HEIGHT = 30;
@@ -14,8 +13,8 @@ Toolbar(color toolbarColor)
 {
   this.toolbarColor = toolbarColor;
   textFont(myFont);
-  backButton = new Widget(MARGIN, MARGIN, TOOLBAR_WIDTH, TOOLBAR_HEIGHT - (2 * MARGIN), "", 100, myFont, EVENT_BACK );
-  dropDownButton = new Widget(SCREENX - (MARGIN +  TOOLBAR_WIDTH), 2,TOOLBAR_WIDTH, TOOLBAR_HEIGHT - (2 * MARGIN), "", 100, myFont, EVENT_BACK );    
+  backButton = new Widget(MARGIN, MARGIN, TOOLBAR_WIDTH, TOOLBAR_HEIGHT - (2 * MARGIN), "", 100, myFont, EVENT_BACK_BUTTON );
+  dropDownButton = new Widget(SCREENX - (MARGIN +  TOOLBAR_WIDTH), 2,TOOLBAR_WIDTH, TOOLBAR_HEIGHT - (2 * MARGIN), "", 100, myFont, EVENT_DROP );    
 
   
   widgetList = new ArrayList();
