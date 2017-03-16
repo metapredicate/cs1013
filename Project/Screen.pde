@@ -1,7 +1,7 @@
 
 class Screen
 {
-  private ArrayList widgetList;
+  private ArrayList widgetList, barChartList;
   color backgroundColor;
 
   Screen(color backgroundColor)
@@ -9,6 +9,7 @@ class Screen
     this.backgroundColor = backgroundColor;
 
     widgetList = new ArrayList();
+    barChartList = new ArrayList();
   }
 
   void draw()
@@ -18,6 +19,12 @@ class Screen
     {
       Widget aWidget = (Widget) widgetList.get(i);
       aWidget.draw();
+    }
+    
+    for(int i = 0;(i < barChartList.size());i++)
+    {
+      BarChart aBarChart = (BarChart) barChartList.get(i);
+      aBarChart.draw(SCREENX - 100, SCREENY - 100, 50, 50);
     }
   }
 
@@ -40,6 +47,11 @@ class Screen
   {
     widgetList.add(new Widget(x, y, width, height, label, widgetColor, widgetFont, event));
   }
+  
+  void addBarChart(BarChart barChart)
+  {
+    barChartList.add(barChart);
+  }
 
   void mouseMoved()
   {
@@ -49,9 +61,11 @@ class Screen
     {
       Widget aWidget = (Widget) widgetList.get(i);
       event = aWidget.getEvent(mouseX, mouseY);
-     
-
-  
+      
+      if (event != EVENT_NULL)
+        aWidget.setStrokeColor(color(255));
+      else
+        aWidget.setStrokeColor(color(0));
     }
   }
 }

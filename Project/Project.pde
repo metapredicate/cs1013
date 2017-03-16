@@ -1,9 +1,13 @@
 import org.gicentre.utils.stat.*;
 import de.bezier.data.sql.*;
+
 PFont myFont;
 PropertyEntry[] propertyArray;
 SQLite db;
 BarChart barChart;
+
+Screen firstScreen, secondScreen, currentScreen;
+
 void settings() 
 {
   size(SCREENX, SCREENY);
@@ -32,10 +36,19 @@ void setup()
   barChart.setBarColour(color(200,80,80,150));
   barChart.setData(temp);
   
+  firstScreen = new Screen(255);
+  secondScreen = new Screen(255);
+  
+  currentScreen = firstScreen;
+  
+  BarChart barChart = new BarChart(this);
+  barChart.setData(new float[] {0.76, 0.24, 0.39, 0.18, 0.20});
+  
+  firstScreen.addBarChart(barChart);
 }
 
 void draw() 
 {
   background(255);
-  barChart.draw(15, 15, width-30, height-30);
+  currentScreen.draw();
 }
