@@ -68,8 +68,10 @@ void mousePressed()
   case EVENT_GRAPH_BUTTON:
     currentScreen = graphScreen;
     break;
-  case EVENT_BACK_BUTTON:
-    currentScreen = mainScreen;
-    break;
+  }
+  switch(toolbar.getEvent())
+  {
+   case EVENT_BACK_BUTTON:  
+     currentScreen = mainScreen;
   }
 }
