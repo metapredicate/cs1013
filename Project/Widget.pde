@@ -1,12 +1,12 @@
-class Widget 
+class Widget
 {
   int x, y, width, height;
   String label; 
   int event;
-  color widgetColor, labelColor;
+  color widgetColor, labelColor, strokeColor;
   PFont widgetFont;
 
-  Widget(int x, int y, int width, int height, String label, color widgetColor, PFont widgetFont, int event) 
+  Widget(int x, int y, int width, int height, String label, color widgetColor, PFont widgetFont, int event)
   {
     this.x=x; 
     this.y=y; 
@@ -16,14 +16,18 @@ class Widget
     this.event=event; 
     this.widgetColor=widgetColor; 
     this.widgetFont=widgetFont;
-    labelColor= color(0);
-  }
 
+    strokeColor = color(0);
+    labelColor= color(255);
+  }
   void draw()
   {
+    stroke(strokeColor);
     fill(widgetColor);
     rect(x, y, width, height);
+
     fill(labelColor);
+    textFont(widgetFont);
     text(label, x+10, y+height-10);
   }
   int getEvent(int mX, int mY)
@@ -33,5 +37,10 @@ class Widget
       return event;
     }
     return EVENT_NULL;
+  }
+
+  void setStrokeColor(color strokeColor)
+  {
+    this.strokeColor = strokeColor;
   }
 }
