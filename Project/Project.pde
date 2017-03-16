@@ -5,6 +5,7 @@ PFont myFont;
 PropertyEntry[] propertyArray;
 SQLite db;
 BarChart barChart;
+Toolbar toolbar;
 
 Screen firstScreen, secondScreen, currentScreen;
 
@@ -14,6 +15,8 @@ void settings()
 }
 void setup() 
 {
+  color toolbarColor = color(150, 150, 150); 
+  toolbar = new Toolbar(toolbarColor);
   myFont = loadFont("Serif.plain-15.vlw");
   barChart = new BarChart(this);
   db = new SQLite(this, "landdata.db");
@@ -51,4 +54,5 @@ void draw()
 {
   background(255);
   currentScreen.draw();
+  toolbar.draw();
 }

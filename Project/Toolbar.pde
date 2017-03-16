@@ -6,16 +6,18 @@ final int EVENT_DROP = 2;
 final int MARGIN = 2;
 final int TOOLBAR_HEIGHT = 30;
 ArrayList widgetList;
+final color toolbarColor;
 
  
   Widget backButton, dropDownButton;
 
 Toolbar(color toolbarColor)
 {
+  this.toolbarColor = toolbarColor;
   stdFont=loadFont("MongolianBaiti-48.vlw");
   textFont(stdFont);
   backButton = new Widget(MARGIN, MARGIN, SCREENX / 20, TOOLBAR_HEIGHT - (2 * MARGIN), "", 100, stdFont, EVENT_BACK );
-  dropDownButton = new Widget(SCREENX - MARGIN, 2, SCREENX / 15, TOOLBAR_HEIGHT - (2 * MARGIN), "", 100, stdFont, EVENT_BACK );    
+  dropDownButton = new Widget(SCREENX - (MARGIN +  SCREENX / 20), 2, SCREENX / 15, TOOLBAR_HEIGHT - (2 * MARGIN), "", 100, stdFont, EVENT_BACK );    
 
   
   widgetList = new ArrayList();
@@ -31,8 +33,8 @@ void draw()
   rect(0, 0, SCREENX, TOOLBAR_HEIGHT);
   for(int i = 0; i<widgetList.size(); i++)
   {
+    Widget aWidget =  (Widget) widgetList.get(i);
     aWidget.setStrokeColor(toolbarColor);
-    Widget aWidget = (Widget)widgetList.get(i);
     aWidget.draw();
   }
   
