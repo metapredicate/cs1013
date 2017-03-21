@@ -34,25 +34,6 @@ class Toolbar
     }
   }
 
-  void mousePressed()
-  {
-    int event;
-    for (int i = 0; i<widgetList.size(); i++)
-    {
-      Widget aWidget = (Widget) widgetList.get(i);
-      event = aWidget.getEvent(mouseX, mouseY);
-      switch(event) 
-      {
-      case EVENT_BACK_BUTTON:
-
-        break;
-      case EVENT_DROP:
-
-        break;
-      }
-    }
-  }
-
   int getEvent()
   {
     int event;
