@@ -52,9 +52,12 @@ void mousePressed()
   switch(toolbar.getEvent())
   {
   case EVENT_BACK_BUTTON: 
-    backList.remove(currentScreen);
-    currentScreen = (Screen) backList.get(backList.size() - 1);
-    break;
+    if (backList.size() != 1)
+    {
+      backList.remove(currentScreen);
+      currentScreen = (Screen) backList.get(backList.size() - 1);
+      break;
+    }
   }
 }
 
