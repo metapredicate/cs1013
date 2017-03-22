@@ -32,7 +32,7 @@ class Widget
   }
   int getEvent(int mX, int mY)
   {
-    if (mX>x && mX < x+width && mY >y && mY <y+height)
+    if (mX>=x && mX <=x+width && mY >=y && mY <=y+height)
     {
       return event;
     }
@@ -42,5 +42,15 @@ class Widget
   void setStrokeColor(color strokeColor)
   {
     this.strokeColor = strokeColor;
+  }
+  
+  int getX()
+  {
+     return x; 
+  }
+  
+  int getY()
+  {
+     return y; 
   }
 }

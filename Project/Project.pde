@@ -9,7 +9,8 @@ SQLite db;
 BarChart barChart;
 Toolbar toolbar;
 
-Screen mainScreen, graphScreen, currentScreen;
+public boolean dropped = false;
+public Screen mainScreen, graphScreen, currentScreen;
 
 void settings() 
 {
@@ -45,6 +46,7 @@ void mousePressed()
   switch(currentScreen.getEvent())
   {
   case EVENT_GRAPH_BUTTON:
+  case EVENT_QUERY1:
     currentScreen = graphScreen;
     backList.add(currentScreen);
     break;
@@ -58,9 +60,17 @@ void mousePressed()
       currentScreen = (Screen) backList.get(backList.size() - 1);
       break;
     }
-  case EVENT_DROP:
-    
+  
   }
+}
+
+void mouseMoved()
+{
+  if(toolbar.getEvent() == EVENT_DROP)
+    dropped = true;
+  else if(dropped && (toolbar.getEvent() == EVENT_QUERY1 || toolbar.getEvent() == EVENT_QUERY2 || toolbar.getEvent() == EVENT_QUERY3)) {}
+  else
+    dropped = false;
 }
 
 void createGraphScreen()
