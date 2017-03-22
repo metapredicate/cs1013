@@ -75,19 +75,38 @@ void createGraphScreen()
   {
     println( db.getString("Name") );
   }
-  db.query( "SELECT * FROM test" );
-  int maxValue=0;
-  float [] temp = new float[NUMBER_OF_ENTRIES];
-  for (int i=0; i<NUMBER_OF_ENTRIES; i++)
-  {
-    if (db.next()) {
-      temp[i] = parseFloat(db.getString("price"));
-      if (temp[i]>maxValue) 
-      {
-        maxValue = int(temp[i]);
-      }
-    }
-  }
+  //db.query( "SELECT * FROM registry" );
+  //int maxValue=0;
+  //float [] temp = new float[NUMBER_OF_ENTRIES];
+  //for (int i=0; i<NUMBER_OF_ENTRIES; i++)
+  //{
+  //  if (db.next()) {
+  //    temp[i] = parseFloat(db.getString("Price"));
+  //    if (temp[i]>maxValue) 
+  //    {
+  //      maxValue = int(temp[i]);
+  //    }
+  //  }
+  //}
+  
+  //db.query( "SELECT * FROM registry ORDER BY Price DESC LIMIT 10" );
+  //int maxValue=0;
+  //float [] temp = new float[10];
+  //for (int i=0; i<10; i++)
+  //{
+  //  if (db.next()) {
+  //    temp[i] = parseFloat(db.getInt("Price"));
+  //    if (temp[i]>maxValue) 
+  //    {
+  //      maxValue = int(temp[i]);
+  //    }
+  //  }
+  //}
+  
+  
+  
+  
+  
   barChart.setBarColour(color(200, 80, 80, 150));
   barChart.setData(temp);
 
