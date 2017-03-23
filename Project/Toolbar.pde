@@ -4,21 +4,32 @@ class Toolbar
   final int TOOLBAR_HEIGHT = 30;
   ArrayList widgetList, queryList;
   final color toolbarColor;
-  final int TOOLBAR_WIDTH = SCREENX / 20;
+  final int BUTTON_WIDTH = SCREENX / 20;
+  final int BUTTON_HEIGHT = TOOLBAR_HEIGHT - (2 * MARGIN);
   final int QUERY_WIDGET_WIDTH = SCREENX / 5;
   Widget backButton, dropDownButton, query1, query2, query3;
+  
+  PImage backArrowImage, menuImage;
+  int backButtonX, backButtonY, dropDownButtonX, dropDownButtonY;
  
-  Toolbar(color toolbarColor)
+  Toolbar(color toolbarColor, PImage backArrowImage, PImage menuImage)
   {
     this.toolbarColor = toolbarColor;
     textFont(myFont);
-    backButton = new Widget(MARGIN, MARGIN, TOOLBAR_WIDTH, TOOLBAR_HEIGHT - (2 * MARGIN), "", 100, myFont, EVENT_BACK_BUTTON );
-    dropDownButton = new Widget(SCREENX - (MARGIN +  TOOLBAR_WIDTH), 2, TOOLBAR_WIDTH, TOOLBAR_HEIGHT - (2 * MARGIN), "", 100, myFont, EVENT_DROP );    
-    query1 = new Widget( dropDownButton.getX() - (QUERY_WIDGET_WIDTH - TOOLBAR_WIDTH), dropDownButton.getY() + (TOOLBAR_HEIGHT - 2 * MARGIN), QUERY_WIDGET_WIDTH, TOOLBAR_HEIGHT,"New Graph Button",
+    
+    backButtonX = MARGIN;
+    backButtonY = MARGIN;
+    backButton = new Widget(backButtonX, backButtonY, BUTTON_WIDTH, BUTTON_HEIGHT, "", 100, myFont, EVENT_BACK_BUTTON );
+    
+    dropDownButtonX = SCREENX - (MARGIN + BUTTON_WIDTH);
+    dropDownButtonY = MARGIN;
+    dropDownButton = new Widget(dropDownButtonX, dropDownButtonY, BUTTON_WIDTH, BUTTON_HEIGHT, "", 100, myFont, EVENT_DROP );    
+    query1 = new Widget( dropDownButton.getX() - (QUERY_WIDGET_WIDTH - BUTTON_WIDTH), dropDownButton.getY() + (TOOLBAR_HEIGHT - 2 * MARGIN), QUERY_WIDGET_WIDTH, TOOLBAR_HEIGHT,"New Graph Button",
                                  230, myFont, EVENT_QUERY1);
-    query2 = new Widget( dropDownButton.getX() - (QUERY_WIDGET_WIDTH - TOOLBAR_WIDTH), query1.getY() + TOOLBAR_HEIGHT, QUERY_WIDGET_WIDTH, TOOLBAR_HEIGHT,"",
+                                 
+    query2 = new Widget( dropDownButton.getX() - (QUERY_WIDGET_WIDTH - BUTTON_WIDTH), query1.getY() + TOOLBAR_HEIGHT, QUERY_WIDGET_WIDTH, TOOLBAR_HEIGHT,"",
                                  230, myFont, EVENT_QUERY2);
-    query3 = new Widget( dropDownButton.getX() - (QUERY_WIDGET_WIDTH - TOOLBAR_WIDTH), query2.getY() + TOOLBAR_HEIGHT, QUERY_WIDGET_WIDTH, TOOLBAR_HEIGHT,"",
+    query3 = new Widget( dropDownButton.getX() - (QUERY_WIDGET_WIDTH - BUTTON_WIDTH), query2.getY() + TOOLBAR_HEIGHT, QUERY_WIDGET_WIDTH, TOOLBAR_HEIGHT,"",
                                  230, myFont, EVENT_QUERY3);
     widgetList = new ArrayList();
     widgetList.add(backButton); 
@@ -28,6 +39,12 @@ class Toolbar
     queryList.add(query1);
     queryList.add(query2);
     queryList.add(query3);
+    
+    this.menuImage = menuImage;
+    this.backArrowImage = backArrowImage;
+    
+    menuImage.resize(BUTTON_WIDTH, BUTTON_HEIGHT);
+    backArrowImage.resize(BUTTON_WIDTH, BUTTON_HEIGHT);
   }
 
   void draw()
@@ -51,7 +68,8 @@ class Toolbar
         aWidget.draw();
       }
     }
-    
+    image(backArrowImage, backButtonX, backButtonY);
+    image(menuImage, dropDownButtonX, dropDownButtonY);
   }
 
   int getEvent()

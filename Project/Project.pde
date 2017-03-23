@@ -21,7 +21,7 @@ void setup()
   backList = new ArrayList();
   color toolbarColor = color(150, 150, 150); 
   myFont = loadFont("Serif.plain-15.vlw");
-  toolbar = new Toolbar(toolbarColor);
+  toolbar = new Toolbar(toolbarColor, loadImage("backArrow.png"), loadImage("menu.png"));
 
   createGraphScreen();
 
@@ -114,7 +114,7 @@ void createGraphScreen()
 
 
 
-
+/*
 
   barChart.setBarColour(color(200, 80, 80, 150));
   barChart.setData(temp);
@@ -131,4 +131,5 @@ void createGraphScreen()
   barChart.setBarColour(color(200, 0, 200));
 
   graphScreen.addText( SCREENX / 2 - 50, SCREENY - 90, "Prices over time");
+  */
 }
