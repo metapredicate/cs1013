@@ -26,9 +26,7 @@ void setup()
 
   createGraphScreen();
 
-  
-  color babyBlue = color(137, 207, 240);
-  homeScreen = new Screen(babyBlue);
+  homeScreen = new Screen(255);
   color widgetColor = color(200, 50, 50);
 
   homeScreen.addWidget(SCREENX / 2 - 50, SCREENY / 2 - 15, 100, 30, "Graph", widgetColor, myFont, EVENT_GRAPH_BUTTON);
@@ -67,11 +65,7 @@ void mousePressed()
 
 void mouseMoved()
 {
-  if (toolbar.getEvent() == EVENT_DROP)
-    dropped = true;
-  else if (dropped && (toolbar.getEvent() == EVENT_QUERY1 || toolbar.getEvent() == EVENT_QUERY2 || toolbar.getEvent() == EVENT_QUERY3)) {
-  } else
-    dropped = false;
+  toolbar.mouseMoved();
 }
 
 void createGraphScreen()
@@ -118,8 +112,8 @@ void createGraphScreen()
 
 /*
 
-  color graphScreenBG = color( 119, 136, 153);
-  graphScreen = new Screen(graphScreenBG);
+  barChart.setBarColour(color(200, 80, 80, 150));
+  barChart.setData(temp);
 
   graphScreen = new Screen(255);
 

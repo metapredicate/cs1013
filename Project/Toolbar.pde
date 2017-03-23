@@ -76,6 +76,20 @@ class Toolbar
     image(menuImage, dropDownButtonX, dropDownButtonY);
   }
 
+  void mouseMoved()
+  {
+    if (toolbar.getEvent() == EVENT_DROP)
+      dropped = true;
+    else if (/*dropped &&*/ ( toolbar.getEvent() == EVENT_QUERY1 )
+      query1.setStrokeColor(255);
+    else if( toolbar.getEvent() == EVENT_QUERY2 ) 
+      query2.setStrokeColor(255);
+    else if( toolbar.getEvent() == EVENT_QUERY3 )) 
+      query3.setStrokeCOlor(255);
+    else
+      dropped = false;
+  }
+
   int getEvent()
   {
     int event, eventQ;
