@@ -23,19 +23,22 @@ void setup()
   backList = new ArrayList();
   color toolbarColor = color(150, 150, 150); 
   myFont = loadFont("Serif.plain-15.vlw");
-  toolbar = new Toolbar(toolbarColor, loadImage("backArrow.png"), loadImage("menu.png"));
+  baskerville = loadFont("Baskerville-Bold-48.vlw");
+  toolbar = new Toolbar(toolbarColor, loadImage("backArrow.png"), loadImage("menu.png"), loadImage("homeButton.png"));
 
   createGraphScreen();
-
-  homeScreen = new Screen(255);
-  color widgetColor = color(200, 50, 50);
   
-  color processYellow = color(255, 255, 153);
-  contactScreen = new Screen(processYellow);
-  contactScreen.addText(SCREENX/2, SCREENY/2, "Credits: ",32, baskerville);
+  
+  homeScreen = new Screen(BABY_BLUE);
+  
+  
+  
+  
+  contactScreen = new Screen(PROCESS_YELLOW);
+  contactScreen.addText(SCREENX/2, SCREENY/2, "Credits: ", 32, baskerville, 0);
 
-  homeScreen.addWidget(SCREENX / 2 - 50, SCREENY / 2 - 15, 100, 30, "Graph", widgetColor, myFont, EVENT_GRAPH_BUTTON);
-  homeScreen.addWidget(SCREENX / 2 - 50, SCREENY / 2 - 45, 100, 30, "Contact Us", processYellow, myFont, EVENT_CONTACT_BUTTON);
+  homeScreen.addWidget(SCREENX / 2 - 50, SCREENY / 2 - 15, 100, 30, "Graph", WIDGET_RED, myFont, EVENT_GRAPH_BUTTON);
+  homeScreen.addWidget(SCREENX / 2 - 50, SCREENY / 2 - 45, 100, 30, "Contact Us!", PROCESS_YELLOW, myFont, EVENT_CONTACT_BUTTON);
   
   
   currentScreen = homeScreen;
@@ -61,6 +64,9 @@ void mousePressed()
     currentScreen = contactScreen;
     backList.add(currentScreen);
     break;
+   case EVENT_HOME_BUTTON:
+    currentScreen = homeScreen;
+    backList.add(currentScreen);
   }
   switch(toolbar.getEvent())
   {
