@@ -7,7 +7,7 @@ class Toolbar
   final int BUTTON_WIDTH = SCREENX / 20;
   final int BUTTON_HEIGHT = TOOLBAR_HEIGHT - (2 * MARGIN);
   final int QUERY_WIDGET_WIDTH = SCREENX / 5;
-  Widget backButton, dropDownButton, query1, query2, query3;
+  Widget backButton, homeButton, dropDownButton, query1, query2, query3;
 
   PImage backArrowImage, menuImage;
   int backButtonX, backButtonY, dropDownButtonX, dropDownButtonY;
