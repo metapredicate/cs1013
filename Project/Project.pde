@@ -10,7 +10,7 @@ BarChart barChart;
 Toolbar toolbar;
 
 public boolean dropped = false;
-public Screen mainScreen, graphScreen, currentScreen;
+public Screen homeScreen, graphScreen, currentScreen;
 
 void settings() 
 {
@@ -25,12 +25,12 @@ void setup()
 
   createGraphScreen();
 
-  mainScreen = new Screen(255);
+  homeScreen = new Screen(255);
   color widgetColor = color(200, 50, 50);
 
-  mainScreen.addWidget(SCREENX / 2 - 50, SCREENY / 2 - 15, 100, 30, "Graph", widgetColor, myFont, EVENT_GRAPH_BUTTON);
+  homeScreen.addWidget(SCREENX / 2 - 50, SCREENY / 2 - 15, 100, 30, "Graph", widgetColor, myFont, EVENT_GRAPH_BUTTON);
 
-  currentScreen = mainScreen;
+  currentScreen = homeScreen;
   backList.add(currentScreen);
 }
 
@@ -60,16 +60,15 @@ void mousePressed()
       currentScreen = (Screen) backList.get(backList.size() - 1);
       break;
     }
-  
   }
 }
 
 void mouseMoved()
 {
-  if(toolbar.getEvent() == EVENT_DROP)
+  if (toolbar.getEvent() == EVENT_DROP)
     dropped = true;
-  else if(dropped && (toolbar.getEvent() == EVENT_QUERY1 || toolbar.getEvent() == EVENT_QUERY2 || toolbar.getEvent() == EVENT_QUERY3)) {}
-  else
+  else if (dropped && (toolbar.getEvent() == EVENT_QUERY1 || toolbar.getEvent() == EVENT_QUERY2 || toolbar.getEvent() == EVENT_QUERY3)) {
+  } else
     dropped = false;
 }
 
@@ -98,7 +97,7 @@ void createGraphScreen()
   //    }
   //  }
   //}
-  
+
   //db.query( "SELECT * FROM registry ORDER BY Price DESC LIMIT 10" );
   //int maxValue=0;
   //float [] temp = new float[10];
@@ -112,11 +111,11 @@ void createGraphScreen()
   //    }
   //  }
   //}
-  
-  
-  
-  
-  
+
+
+
+
+
   barChart.setBarColour(color(200, 80, 80, 150));
   barChart.setData(temp);
 
