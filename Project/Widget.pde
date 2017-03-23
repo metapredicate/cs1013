@@ -16,7 +16,7 @@ class Widget
     this.event=event; 
     this.widgetColor=widgetColor; 
     this.widgetFont=widgetFont;
-    
+    this.fontSize = 15;
 
     strokeColor = color(0);
     labelColor= color(255);
