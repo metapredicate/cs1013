@@ -28,9 +28,14 @@ void setup()
 
   homeScreen = new Screen(255);
   color widgetColor = color(200, 50, 50);
+  
+  color processYellow = color(255, 255, 153);
+  Screen contactScreen = new Screen(processYellow);
 
   homeScreen.addWidget(SCREENX / 2 - 50, SCREENY / 2 - 15, 100, 30, "Graph", widgetColor, myFont, EVENT_GRAPH_BUTTON);
-
+  homeScreen.addWidget(SCREENX / 2 - 50, SCREENY / 2 - 45, 100, 30, "Contact Us", processYellow, myFont, EVENT_CONTACT_BUTTON);
+  
+  
   currentScreen = homeScreen;
   backList.add(currentScreen);
 }
@@ -48,6 +53,10 @@ void mousePressed()
   case EVENT_GRAPH_BUTTON:
   case EVENT_QUERY1:
     currentScreen = graphScreen;
+    backList.add(currentScreen);
+    break;
+  case EVENT_CONTACT_BUTTON:
+    currentScreen = contactScreen;
     backList.add(currentScreen);
     break;
   }

@@ -6,6 +6,7 @@ final int EVENT_NULL = -1;
 final int EVENT_GRAPH_BUTTON = 1;
 final int EVENT_BACK_BUTTON = 2;
 final int EVENT_DROP = 3;
+final int EVENT_CONTACT_BUTTON = 10;
 
 final int EVENT_QUERY1 = 4;
 final int EVENT_QUERY2 = 5;
