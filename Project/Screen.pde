@@ -67,8 +67,9 @@ class Screen
     labelX = x;
     labelY = y;
   }
-  void addText(float x, float y, String text, int fontSize, PFont font)
+  void addText(float x, float y, String text, int fontSize, PFont font, color fontColour)
   {
+    fill(fontColour);
     textFont(font);
     textSize(fontSize);
     text(text, x, y);
