@@ -44,6 +44,12 @@ class Widget
     this.strokeColor = strokeColor;
   }
   
+  void setFontColor(color labelColor)
+  {
+    this.labelColor = labelColor;
+  }
+  
+  
   int getX()
   {
      return x; 

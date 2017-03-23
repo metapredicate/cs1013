@@ -18,6 +18,7 @@ void settings()
 }
 void setup() 
 { 
+  
   backList = new ArrayList();
   color toolbarColor = color(150, 150, 150); 
   myFont = loadFont("Serif.plain-15.vlw");
@@ -36,7 +37,6 @@ void setup()
 
 void draw() 
 {
-  background(255);
   currentScreen.draw();
   toolbar.draw();
 }

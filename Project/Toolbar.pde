@@ -23,14 +23,16 @@ class Toolbar
     
     dropDownButtonX = SCREENX - (MARGIN + BUTTON_WIDTH);
     dropDownButtonY = MARGIN;
-    dropDownButton = new Widget(dropDownButtonX, dropDownButtonY, BUTTON_WIDTH, BUTTON_HEIGHT, "", 100, myFont, EVENT_DROP );    
-    query1 = new Widget( dropDownButton.getX() - (QUERY_WIDGET_WIDTH - BUTTON_WIDTH), dropDownButton.getY() + (TOOLBAR_HEIGHT - 2 * MARGIN), QUERY_WIDGET_WIDTH, TOOLBAR_HEIGHT,"New Graph Button",
+    dropDownButton = new Widget(dropDownButtonX, dropDownButtonY, BUTTON_WIDTH, BUTTON_HEIGHT, "", 100, myFont, EVENT_DROP );   
+    
+    query1 = new Widget( dropDownButton.getX() - (QUERY_WIDGET_WIDTH - BUTTON_WIDTH), dropDownButton.getY() + (TOOLBAR_HEIGHT - 2 * MARGIN), QUERY_WIDGET_WIDTH, TOOLBAR_HEIGHT,"Highest Priced Transactions",
                                  230, myFont, EVENT_QUERY1);
-                                 
     query2 = new Widget( dropDownButton.getX() - (QUERY_WIDGET_WIDTH - BUTTON_WIDTH), query1.getY() + TOOLBAR_HEIGHT, QUERY_WIDGET_WIDTH, TOOLBAR_HEIGHT,"",
                                  230, myFont, EVENT_QUERY2);
     query3 = new Widget( dropDownButton.getX() - (QUERY_WIDGET_WIDTH - BUTTON_WIDTH), query2.getY() + TOOLBAR_HEIGHT, QUERY_WIDGET_WIDTH, TOOLBAR_HEIGHT,"",
                                  230, myFont, EVENT_QUERY3);
+                                 
+    
     widgetList = new ArrayList();
     widgetList.add(backButton); 
     widgetList.add(dropDownButton);
@@ -65,6 +67,7 @@ class Toolbar
       {
         Widget aWidget =  (Widget) queryList.get(i);
         aWidget.setStrokeColor(toolbarColor);
+        aWidget.setFontColor(0);
         aWidget.draw();
       }
     }
