@@ -85,7 +85,7 @@ class Toolbar
     else if( toolbar.getEvent() == EVENT_QUERY2 ) 
       query2.setStrokeColor(255);
     else if( toolbar.getEvent() == EVENT_QUERY3 )) 
-      query3.setStrokeCOlor(255);
+      query3.setStrokeColor(255);
     else
       dropped = false;
   }
