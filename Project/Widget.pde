@@ -2,7 +2,7 @@ class Widget
 {
   int x, y, width, height;
   String label; 
-  int event;
+  int event, fontSize;
   color widgetColor, labelColor, strokeColor;
   PFont widgetFont;
 
@@ -16,6 +16,7 @@ class Widget
     this.event=event; 
     this.widgetColor=widgetColor; 
     this.widgetFont=widgetFont;
+    
 
     strokeColor = color(0);
     labelColor= color(255);
@@ -28,6 +29,7 @@ class Widget
 
     fill(labelColor);
     textFont(widgetFont);
+    textSize(fontSize);
     text(label, x+10, y+height-10);
   }
   int getEvent(int mX, int mY)
@@ -58,5 +60,10 @@ class Widget
   int getY()
   {
      return y; 
+  }
+  
+  void setFontSize(int fontSize)
+  {
+    this.fontSize = fontSize;
   }
 }
