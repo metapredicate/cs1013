@@ -11,45 +11,41 @@ class Toolbar
 
   PImage backArrowImage, menuImage;
   int backButtonX, backButtonY, dropDownButtonX, dropDownButtonY;
-
-  Toolbar(color toolbarColor, PImage backArrowImage, PImage menuImage)
+ 
+  Toolbar(color toolbarColor, PImage backArrowImage, PImage menuImage, PImage homeButtonImage)
   {
+    homeButtonImage.resize(200,200);
     this.toolbarColor = toolbarColor;
     textFont(myFont);
-
+    
     backButtonX = MARGIN;
     backButtonY = MARGIN;
     backButton = new Widget(backButtonX, backButtonY, BUTTON_WIDTH, BUTTON_HEIGHT, "", 100, myFont, EVENT_BACK_BUTTON );
-    backButton.setStrokeColor(toolbarColor);
-
+    homeButton = new Widget((backButtonX + 315), backButtonY, 200,200, "", 100, myFont, EVENT_HOME_BUTTON);
     dropDownButtonX = SCREENX - (MARGIN + BUTTON_WIDTH);
     dropDownButtonY = MARGIN;
-    dropDownButton = new Widget(dropDownButtonX, dropDownButtonY, BUTTON_WIDTH, BUTTON_HEIGHT, "", 100, myFont, EVENT_DROP );  
-    dropDownButton.setStrokeColor(toolbarColor);
-
-    query1 = new Widget( dropDownButton.getX() - (QUERY_WIDGET_WIDTH - BUTTON_WIDTH), dropDownButton.getY() + (TOOLBAR_HEIGHT - 2 * MARGIN), QUERY_WIDGET_WIDTH, TOOLBAR_HEIGHT, "Highest Priced Transactions", 
-      230, myFont, EVENT_QUERY1);
-      query1.setStrokeColor(toolbarColor);
-    query2 = new Widget( dropDownButton.getX() - (QUERY_WIDGET_WIDTH - BUTTON_WIDTH), query1.getY() + TOOLBAR_HEIGHT, QUERY_WIDGET_WIDTH, TOOLBAR_HEIGHT, "Graph", 
-      230, myFont, EVENT_QUERY2);
-      query2.setStrokeColor(toolbarColor);
-    query3 = new Widget( dropDownButton.getX() - (QUERY_WIDGET_WIDTH - BUTTON_WIDTH), query2.getY() + TOOLBAR_HEIGHT, QUERY_WIDGET_WIDTH, TOOLBAR_HEIGHT, "Some other shit", 
-      230, myFont, EVENT_QUERY3);
-     query3.setStrokeColor(toolbarColor);
-
-
+    dropDownButton = new Widget(dropDownButtonX, dropDownButtonY, BUTTON_WIDTH, BUTTON_HEIGHT, "", 100, myFont, EVENT_DROP );   
+    
+    query1 = new Widget( dropDownButton.getX() - (QUERY_WIDGET_WIDTH - BUTTON_WIDTH), dropDownButton.getY() + (TOOLBAR_HEIGHT - 2 * MARGIN), QUERY_WIDGET_WIDTH, TOOLBAR_HEIGHT,"Highest Priced Transactions",
+                                 230, myFont, EVENT_QUERY1);
+    query2 = new Widget( dropDownButton.getX() - (QUERY_WIDGET_WIDTH - BUTTON_WIDTH), query1.getY() + TOOLBAR_HEIGHT, QUERY_WIDGET_WIDTH, TOOLBAR_HEIGHT,"Graph",
+                                 230, myFont, EVENT_QUERY2);
+    query3 = new Widget( dropDownButton.getX() - (QUERY_WIDGET_WIDTH - BUTTON_WIDTH), query2.getY() + TOOLBAR_HEIGHT, QUERY_WIDGET_WIDTH, TOOLBAR_HEIGHT,"Some other stuff",
+                                 230, myFont, EVENT_QUERY3);
+                                 
+    
     widgetList = new ArrayList();
     widgetList.add(backButton); 
     widgetList.add(dropDownButton);
-
+    
     queryList = new ArrayList();
     queryList.add(query1);
     queryList.add(query2);
     queryList.add(query3);
-
+    
     this.menuImage = menuImage;
     this.backArrowImage = backArrowImage;
-
+    
     menuImage.resize(BUTTON_WIDTH, BUTTON_HEIGHT);
     backArrowImage.resize(BUTTON_WIDTH, BUTTON_HEIGHT);
   }
@@ -62,10 +58,11 @@ class Toolbar
     for (int i = 0; i<widgetList.size(); i++)
     {
       Widget aWidget =  (Widget) widgetList.get(i);
+      aWidget.setStrokeColor(toolbarColor);
       aWidget.draw();
     }
-
-    if (dropped)
+    
+    if(dropped)
     {
       for (int i = 0; i < queryList.size(); i++)
       {
@@ -82,31 +79,16 @@ class Toolbar
 
   void mouseMoved()
   {
-    for (int i = 0; (i < widgetList.size()); i++)
-    {
-      Widget aWidget = (Widget) widgetList.get(i);
-      if (aWidget.getEvent(mouseX, mouseY) == EVENT_DROP)
-      {
-        dropped = true;
-        aWidget.setStrokeColor(255);
-      } else if (aWidget.getEvent(mouseX, mouseY) != EVENT_NULL)
-        aWidget.setStrokeColor(255);
-      else
-        aWidget.setStrokeColor(toolbarColor);
-      
-      
-        for (int j = 0; (j < queryList.size()); j++)
-        {
-          Widget bWidget = (Widget) queryList.get(j);
-          if (bWidget.getEvent(mouseX, mouseY) != EVENT_NULL)
-            bWidget.setStrokeColor(255);
-          else
-            bWidget.setStrokeColor(toolbarColor);
-  
-          if (bWidget.getEvent(mouseX, mouseY) == EVENT_NULL && aWidget.getEvent(mouseX, mouseY) != EVENT_DROP)
-            dropped = false;
-        }
-    }
+    if (toolbar.getEvent() == EVENT_DROP)
+      dropped = true;
+    else if (/*dropped &&*/ ( toolbar.getEvent() == EVENT_QUERY1 ))
+      query1.setStrokeColor(255);
+    else if( toolbar.getEvent() == EVENT_QUERY2 ) 
+      query2.setStrokeColor(255);
+    else if( toolbar.getEvent() == EVENT_QUERY3 )
+      query3.setStrokeColor(255);
+    else
+      dropped = false;
   }
 
   int getEvent()
@@ -120,7 +102,7 @@ class Toolbar
       if (event != EVENT_NULL)
         return event;
     }
-
+    
     for (int i = 0; i < queryList.size(); i++)
     {
       Widget bWidget = (Widget) queryList.get(i);
