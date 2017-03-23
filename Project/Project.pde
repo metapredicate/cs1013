@@ -26,7 +26,9 @@ void setup()
 
   createGraphScreen();
 
-  homeScreen = new Screen(255);
+  
+  color babyBlue = color(137, 207, 240);
+  homeScreen = new Screen(babyBlue);
   color widgetColor = color(200, 50, 50);
 
   homeScreen.addWidget(SCREENX / 2 - 50, SCREENY / 2 - 15, 100, 30, "Graph", widgetColor, myFont, EVENT_GRAPH_BUTTON);
@@ -116,8 +118,8 @@ void createGraphScreen()
 
 /*
 
-  barChart.setBarColour(color(200, 80, 80, 150));
-  barChart.setData(temp);
+  color graphScreenBG = color( 119, 136, 153);
+  graphScreen = new Screen(graphScreenBG);
 
   graphScreen = new Screen(255);
 
