@@ -67,6 +67,12 @@ class Screen
     labelX = x;
     labelY = y;
   }
+  void addText(float x, float y, String text, int fontSize, PFont font)
+  {
+    textFont(font);
+    textSize(fontSize);
+    text(text, x, y);
+  }
 
   void mouseMoved()
   {

@@ -4,13 +4,14 @@ import de.bezier.data.sql.*;
 ArrayList backList;
 
 PFont myFont;
+PFont baskerville;
 PropertyEntry[] propertyArray;
 SQLite db;
 BarChart barChart;
 Toolbar toolbar;
 
 public boolean dropped = false;
-public Screen homeScreen, graphScreen, currentScreen;
+public Screen homeScreen, graphScreen, currentScreen, contactScreen;
 
 void settings() 
 {
@@ -30,7 +31,8 @@ void setup()
   color widgetColor = color(200, 50, 50);
   
   color processYellow = color(255, 255, 153);
-  Screen contactScreen = new Screen(processYellow);
+  contactScreen = new Screen(processYellow);
+  contactScreen.addText(SCREENX/2, SCREENY/2, "Credits: ",32, baskerville);
 
   homeScreen.addWidget(SCREENX / 2 - 50, SCREENY / 2 - 15, 100, 30, "Graph", widgetColor, myFont, EVENT_GRAPH_BUTTON);
   homeScreen.addWidget(SCREENX / 2 - 50, SCREENY / 2 - 45, 100, 30, "Contact Us", processYellow, myFont, EVENT_CONTACT_BUTTON);
