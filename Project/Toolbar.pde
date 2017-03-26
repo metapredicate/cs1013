@@ -9,19 +9,23 @@ class Toolbar
   final int QUERY_WIDGET_WIDTH = SCREENX / 5;
   Widget backButton, homeButton, dropDownButton, query1, query2, query3;
 
-  PImage backArrowImage, menuImage;
-  int backButtonX, backButtonY, dropDownButtonX, dropDownButtonY;
+  PImage backArrowImage, menuImage, homeImage;
+  int backButtonX, backButtonY, dropDownButtonX, dropDownButtonY, homeButtonX, homeButtonY;
  
-  Toolbar(color toolbarColor, PImage backArrowImage, PImage menuImage, PImage homeButtonImage)
+  Toolbar(color toolbarColor, PImage backArrowImage, PImage menuImage, PImage homeImage)
   {
-    homeButtonImage.resize(200,200);
+    
     this.toolbarColor = toolbarColor;
     textFont(myFont);
     
     backButtonX = MARGIN;
     backButtonY = MARGIN;
     backButton = new Widget(backButtonX, backButtonY, BUTTON_WIDTH, BUTTON_HEIGHT, "", 100, myFont, EVENT_BACK_BUTTON );
-    homeButton = new Widget((backButtonX + 315), backButtonY, 200,200, "", 100, myFont, EVENT_HOME_BUTTON);
+    
+    homeButtonX = backButtonX + BUTTON_WIDTH + MARGIN;
+    homeButtonY = backButtonY;
+    homeButton = new Widget(homeButtonX, homeButtonY, BUTTON_WIDTH, BUTTON_HEIGHT, "", 100, myFont, EVENT_HOME_BUTTON);
+    
     dropDownButtonX = SCREENX - (MARGIN + BUTTON_WIDTH);
     dropDownButtonY = MARGIN;
     dropDownButton = new Widget(dropDownButtonX, dropDownButtonY, BUTTON_WIDTH, BUTTON_HEIGHT, "", 100, myFont, EVENT_DROP );   
@@ -37,6 +41,7 @@ class Toolbar
     widgetList = new ArrayList();
     widgetList.add(backButton); 
     widgetList.add(dropDownButton);
+    widgetList.add(homeButton);
     
     queryList = new ArrayList();
     queryList.add(query1);
@@ -45,9 +50,10 @@ class Toolbar
     
     this.menuImage = menuImage;
     this.backArrowImage = backArrowImage;
-    
+    this.homeImage = homeImage;
     menuImage.resize(BUTTON_WIDTH, BUTTON_HEIGHT);
     backArrowImage.resize(BUTTON_WIDTH, BUTTON_HEIGHT);
+    homeImage.resize(BUTTON_HEIGHT, BUTTON_HEIGHT);
   }
 
   void draw()
@@ -75,6 +81,7 @@ class Toolbar
     }
     image(backArrowImage, backButtonX, backButtonY);
     image(menuImage, dropDownButtonX, dropDownButtonY);
+    image(homeImage, homeButtonX + (BUTTON_WIDTH / 4), homeButtonY);
   }
 
   void mouseMoved()

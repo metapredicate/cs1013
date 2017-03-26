@@ -28,12 +28,8 @@ void setup()
 
   createGraphScreen();
   
-  
   homeScreen = new Screen(BABY_BLUE);
-  
-  
-  
-  
+ 
   contactScreen = new Screen(PROCESS_YELLOW);
   contactScreen.addText(SCREENX/2, SCREENY/2, "Credits: ", 32, baskerville, 0);
 
@@ -87,6 +83,7 @@ void mouseMoved()
 
 void createGraphScreen()
 {
+  graphScreen = new Screen(WIDGET_RED);
   barChart = new BarChart(this);
   db = new SQLite(this, "landdata.db");
   if (db.connect())
