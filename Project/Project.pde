@@ -31,11 +31,10 @@ void setup()
   homeScreen = new Screen(BABY_BLUE);
  
   contactScreen = new Screen(PROCESS_YELLOW);
-  contactScreen.addText(SCREENX/2, SCREENY/2, "Credits: ", 32, baskerville, 0);
+  //contactScreen.addText(SCREENX/2, SCREENY/2, "Credits: ", 32, baskerville, 0);
 
   homeScreen.addWidget(SCREENX / 2 - 50, SCREENY / 2 - 15, 100, 30, "Graph", WIDGET_RED, myFont, EVENT_GRAPH_BUTTON);
   homeScreen.addWidget(SCREENX / 2 - 50, SCREENY / 2 - 45, 100, 30, "Contact Us!", PROCESS_YELLOW, myFont, EVENT_CONTACT_BUTTON);
-  
   
   currentScreen = homeScreen;
   backList.add(currentScreen);
@@ -60,9 +59,6 @@ void mousePressed()
     currentScreen = contactScreen;
     backList.add(currentScreen);
     break;
-   case EVENT_HOME_BUTTON:
-    currentScreen = homeScreen;
-    backList.add(currentScreen);
   }
   switch(toolbar.getEvent())
   {
@@ -71,9 +67,14 @@ void mousePressed()
     {
       backList.remove(currentScreen);
       currentScreen = (Screen) backList.get(backList.size() - 1);
-      break;
     }
+    break;
+  case EVENT_HOME_BUTTON:
+    currentScreen = homeScreen;
+    backList.add(currentScreen);
+    break;
   }
+  
 }
 
 void mouseMoved()
