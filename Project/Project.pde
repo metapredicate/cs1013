@@ -11,7 +11,7 @@ BarChart barChart;
 Toolbar toolbar;
 
 public boolean dropped = false;
-public Screen homeScreen, graphScreen, currentScreen, contactScreen;
+public Screen homeScreen, townSelectScreen, countySelectScreen, regionSelectScreen, optionScreen, currentScreen, contactScreen, graphScreen;
 
 void settings() 
 {
@@ -29,12 +29,23 @@ void setup()
   createGraphScreen();
   
   homeScreen = new Screen(BABY_BLUE);
- 
   contactScreen = new Screen(PROCESS_YELLOW);
-  //contactScreen.addText(SCREENX/2, SCREENY/2, "Credits: ", 32, baskerville, 0);
-
-  homeScreen.addWidget(SCREENX / 2 - 50, SCREENY / 2 - 15, 100, 30, "Graph", WIDGET_RED, myFont, EVENT_GRAPH_BUTTON);
-  homeScreen.addWidget(SCREENX / 2 - 50, SCREENY / 2 - 45, 100, 30, "Contact Us!", PROCESS_YELLOW, myFont, EVENT_CONTACT_BUTTON);
+  townSelectScreen = new Screen(BEIGE);
+  countySelectScreen = new Screen(LIGHT_GREEN);
+  regionSelectScreen = new Screen(RASPBERRY_RED);
+  optionScreen = new Screen(UNION_JACK_BLUE);
+  
+  
+  
+  
+  
+  
+  
+  
+  homeScreen.addWidget(0, SCREENY / 2 - 200, SCREENX/4, 62, "Town", WOOD_BROWN, myFont, EVENT_TOWN_BUTTON);
+  homeScreen.addWidget(SCREENX / 4, SCREENY / 2 - 200 , SCREENX/4, 62, "County", SHAMROCK_GREEN, myFont, EVENT_COUNTY_BUTTON);
+  homeScreen.addWidget(SCREENX/2, SCREENY / 2 - 200, SCREENX/4, 62, "Region", AMERICAN_RED, myFont, EVENT_REGION_BUTTON);
+  homeScreen.addWidget(SCREENX-SCREENX/4, SCREENY / 2 - 200, SCREENX/4, 62, "Whole U.K.", UNION_JACK_BLUE, myFont, EVENT_UK_BUTTON); 
   
   currentScreen = homeScreen;
   backList.add(currentScreen);
@@ -50,14 +61,21 @@ void mousePressed()
 {
   switch(currentScreen.getEvent())
   {
-  case EVENT_GRAPH_BUTTON:
+  case EVENT_TOWN_BUTTON:
   case EVENT_QUERY1:
-    currentScreen = graphScreen;
+    currentScreen = townSelectScreen;
     backList.add(currentScreen);
     break;
-  case EVENT_CONTACT_BUTTON:
-    currentScreen = contactScreen;
+  case EVENT_COUNTY_BUTTON:
+    currentScreen = countySelectScreen;
     backList.add(currentScreen);
+    break;
+  case EVENT_REGION_BUTTON:
+    currentScreen = regionSelectScreen;
+    backList.add(currentScreen);
+    break;
+  case EVENT_UK_BUTTON:
+    currentScreen = graphScreen;
     break;
   }
   switch(toolbar.getEvent())
