@@ -8,7 +8,8 @@ class Query
     //read data restricted by "domain".
     String[] xAxis = {};
     int[] yAxis = {};
-
+    this.search = search;
+    this.type = type;
     //averagePricesByArea (areas, averageOfArea) [barChart]
     //averageOverTime (time, averagePrice) [barChart]
     //top10 / bottom10 (properties, valuesOfProperties) [barChart, pieChart(?)]
@@ -49,16 +50,16 @@ class Query
     return temp;
   } 
   float average() {
-    String county = "TYNE AND WEAR";
+    
     int average=0;
-    db.query("SELECT AVG(Price) From registry WHERE County = '"+county+"'");
+    db.query("SELECT AVG(Price) From registry WHERE "+type+" = '"+search+"'");
     if (db.next())
       average = db.getInt(1);
     println(average);
     return float(average);
   }
   float [] averageOverTime() {
-    String county = t.getValue();
+
     county = county.toUpperCase();
     println(county);
     float[] average = new float[10];
@@ -71,10 +72,11 @@ class Query
     return (average);
   }
   float getRange() {
+    return 0;
   
   }
   String info() {
-    
+    return null;
   }
   
 }
