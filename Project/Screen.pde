@@ -1,7 +1,6 @@
 
 class Screen
 {
-  
   private String graphLabel;
   private int labelX, labelY;
 
