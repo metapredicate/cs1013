@@ -1,12 +1,19 @@
+<<<<<<< .mine
+=======
 /*
+>>>>>>> .r73
 class Screen
 {
   private String graphLabel;
   private int labelX, labelY;
-
   private ArrayList widgetList, barChartList;
-  color backgroundColor;
-
+  color backgroundColor = CONDITION;
+  PImage backgroundImage;
+  Boolean imageUsed = false;
+  IFTextField t;
+  IFLabel l;
+  
+  
   Screen(color backgroundColor)
   {
     this.backgroundColor = backgroundColor;
@@ -17,10 +24,28 @@ class Screen
     labelX = 0;
     labelY = 0;
   }
+  Screen(PImage backgroundImage)
+  {
+    this.imageUsed = true;
+    this.backgroundImage = backgroundImage;
+    widgetList = new ArrayList();
+    barChartList = new ArrayList();
+    graphLabel = "";
+    labelX = 0;
+    labelY = 0;
+  }
 
   void draw()
   {
-    background(backgroundColor);
+    if( imageUsed )
+    {
+      background(backgroundImage);
+    }
+    else
+    {
+      background(backgroundColor);
+    }
+    
     for (int i = 0; (i < widgetList.size()); i++)
     {
       Widget aWidget = (Widget) widgetList.get(i);
@@ -67,7 +92,18 @@ class Screen
     labelX = x;
     labelY = y;
   }
+  
+  void addIFTextField(String string, int x, int y)
+  {
 
+    this.t = new IFTextField(string, x, y, 150);
+    this.l = new IFLabel("Search", x-10, y-10);
+   // t = new IFTextField(string,x,y);
+    c.add(t);
+    c.add(l);
+    
+    t.addActionListener(this);
+  }
   void mouseMoved()
   {
     int event;
