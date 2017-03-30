@@ -48,22 +48,34 @@ class Query
     println(average);
     return float(average);
   }
-  float [] averageOverTime() {
-    float[] average = new float[10];
-    for (int i=0; i<20; i++) {
-      db.query("SELECT AVG(Price) From registry WHERE "+type+" = '"+search+"' AND Date>='"+(1995+i)+"-01-01 00:00' and Date< '"+(1996+i)+"-01-01 00:00'");
-      if (db.next())
-        average[i] = db.getFloat(1);
-      println(average+" "+(1995+i));
-    }
-    return (average);
-  }
-  float getRange() {
-    return 0;
+////<<<<<<< .mine
+////  /*float [] averageOverTime() {
+
+
+////    println(county);
+////=======
+////  float [] averageOverTime() {
+////>>>>>>> .r67
+////    float[] average = new float[10];
+////    for (int i=0; i<20; i++) {
+////      db.query("SELECT AVG(Price) From registry WHERE "+type+" = '"+search+"' AND Date>='"+(1995+i)+"-01-01 00:00' and Date< '"+(1996+i)+"-01-01 00:00'");
+////      if (db.next())
+////        average[i] = db.getFloat(1);
+////      println(average+" "+(1995+i));
+////    }
+////    return (average);
+////<<<<<<< .mine
+////  }*/
+
+////=======
+//  }
+//  float getRange() {
+//    return 0;
   
-  }
-  String info() {
-    return null;
-  }
+//  }
+//  String info() {
+//    return null;
+//  }
   
+////>>>>>>> .r67
 }
