@@ -1,5 +1,3 @@
-<<<<<<< .mine
-=======
 
 >>>>>>> .r76
 class Screen
@@ -121,3 +119,4 @@ class Screen
     }
   }
 }
+*/

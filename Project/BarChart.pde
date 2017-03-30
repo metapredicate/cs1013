@@ -26,6 +26,11 @@ class BarChart
     calculateBarHeights();
     createBars();
   }
+  
+  BarChart(int x, int y, float[] xValues, float[] yValues)
+  {
+   this(x, y, 600, 360, xValues, yValues); 
+  }
 
   void calculateBarHeights()
   {
