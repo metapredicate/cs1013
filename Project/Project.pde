@@ -32,14 +32,14 @@ void setup()
   toolbar = new Toolbar(toolbarColor, loadImage("backArrow.png"), loadImage("menu.png"), loadImage("homeButton.png"));
   homeBG = loadImage("background1.png");
   homeBG.resize(SCREENX,SCREENY);
-  createGraphScreen();
+  //createGraphScreen();
 
   homeScreen = new Screen(homeBG);
   contactScreen = new Screen(PROCESS_YELLOW);
   townSelectScreen = new Screen(BEIGE);
   countySelectScreen = new Screen(LIGHT_GREEN);
   regionSelectScreen = new Screen(RASPBERRY_RED);
-  optionScreen = new Screen(UNION_JACK_BLUE);
+  optionScreen = new Screen(BABY_BLUE);
   
   
   
@@ -57,7 +57,7 @@ void setup()
   
   //if(currentScreen==townSelectScreen)
   //{
-    townSelectScreen.addIFTextField("Search", SCREENX/2, SCREENY/2);
+    townSelectScreen.addIFTextField("Search", SCREENX/2-180, SCREENY/2, 360, 40);
   //}
   
   currentScreen = homeScreen;
@@ -101,7 +101,7 @@ void mousePressed()
     backList.add(currentScreen);
     break;
   case EVENT_UK_BUTTON:
-    currentScreen = graphScreen;
+    currentScreen = optionScreen;
     backList.add(currentScreen);
     break;
   }
@@ -126,27 +126,34 @@ void mouseMoved()
   toolbar.mouseMoved();
 }
 
+<<<<<<< .mine
+//void createGraphScreen()
+//{
+//  graphScreen = new Screen(WIDGET_RED);
+//  barChart = new BarChart(this);
+=======
 void createGraphScreen()
 {
   graphScreen = new Screen(WIDGET_RED);
   //barChart = new BarChart(this);
+>>>>>>> .r76
 
-  /*
+//  /*
 
-   barChart.setBarColour(color(200, 80, 80, 150));
-   barChart.setData(temp);
+//   barChart.setBarColour(color(200, 80, 80, 150));
+//   barChart.setData(temp);
    
-   graphScreen = new Screen(255);
+//   graphScreen = new Screen(255);
    
-   BarChart barChart = new BarChart(this);
-   barChart.setData(temp);
+//   BarChart barChart = new BarChart(this);
+//   barChart.setData(temp);
    
-   graphScreen.addBarChart(barChart);
-   barChart.setMinValue(0);
-   barChart.setMaxValue(maxValue);
-   barChart.showValueAxis(true);
-   barChart.setBarColour(color(200, 0, 200));
+//   graphScreen.addBarChart(barChart);
+//   barChart.setMinValue(0);
+//   barChart.setMaxValue(maxValue);
+//   barChart.showValueAxis(true);
+//   barChart.setBarColour(color(200, 0, 200));
    
-   graphScreen.addText( SCREENX / 2 - 50, SCREENY - 90, "Prices over time");
-   */
-}
+//   graphScreen.addText( SCREENX / 2 - 50, SCREENY - 90, "Prices over time");
+//   */
+//}

@@ -1,4 +1,7 @@
+<<<<<<< .mine
+=======
 
+>>>>>>> .r76
 class Screen
 {
   private String graphLabel;
@@ -90,11 +93,12 @@ class Screen
     labelY = y;
   }
   
-  void addIFTextField(String string, int x, int y)
+  void addIFTextField(String string, int x, int y, int barWidth, int barHeight)
   {
 
-    this.t = new IFTextField(string, x, y, 150);
-    this.l = new IFLabel("Search", x-10, y-10);
+    this.t = new IFTextField(string, x, y);
+    this.l = new IFLabel("Search", x+barWidth/2 -15, y-15);
+    this.t.setSize(barWidth, barHeight);
    // t = new IFTextField(string,x,y);
     c.add(t);
     c.add(l);
