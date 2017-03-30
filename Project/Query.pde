@@ -2,12 +2,10 @@ class Query
 {
   String search;
   String type;
-
+  SQLite db;
   Query(String search, String type)
   {
     //read data restricted by "domain".
-    String[] xAxis = {};
-    int[] yAxis = {};
     this.search = search;
     this.type = type;
     //averagePricesByArea (areas, averageOfArea) [barChart]
@@ -24,6 +22,7 @@ class Query
     {
       if (db.next()) {
         temp[i] = parseFloat(db.getInt("Price"));
+        println(temp[i]);
       }
     }
     return temp;
@@ -40,7 +39,7 @@ class Query
     return temp;
   } 
   float average() {
-    
+
     int average=0;
     db.query("SELECT AVG(Price) From registry WHERE "+type+" = '"+search+"'");
     if (db.next())
@@ -48,34 +47,41 @@ class Query
     println(average);
     return float(average);
   }
-////<<<<<<< .mine
-////  /*float [] averageOverTime() {
-
-
-////    println(county);
-////=======
-////  float [] averageOverTime() {
-////>>>>>>> .r67
-////    float[] average = new float[10];
-////    for (int i=0; i<20; i++) {
-////      db.query("SELECT AVG(Price) From registry WHERE "+type+" = '"+search+"' AND Date>='"+(1995+i)+"-01-01 00:00' and Date< '"+(1996+i)+"-01-01 00:00'");
-////      if (db.next())
-////        average[i] = db.getFloat(1);
-////      println(average+" "+(1995+i));
-////    }
-////    return (average);
-////<<<<<<< .mine
-////  }*/
-
-////=======
-//  }
-//  float getRange() {
-//    return 0;
+  float [] averageOverTime() {
+    float[] average = new float[10];
+    for (int i=0; i<20; i++) {
+      db.query("SELECT AVG(Price) From registry WHERE "+type+" = '"+search+"' AND Date>='"+(1995+i)+"-01-01 00:00' and Date< '"+(1996+i)+"-01-01 00:00'");
+      if (db.next()){
+        average[i] = db.getFloat(1);
+      println(average+" "+(1995+i));
+      }
+    }
+    return (average);
+  }
+  float getMin() {
+    float min =0;
+    db.query("SELECT MIN(Price) From registry WHERE "+type+" = '"+search+"'");
+    if (db.next())
+      min = db.getInt(1);
+    println(min);  
+    return min;
+  }
+  float getMax() {
+    float max =0;
+    db.query("SELECT MAX(Price) From registry WHERE "+type+" = '"+search+"'");
+    if (db.next())
+      max = db.getInt(1);
+    println(max);  
+    return max;
+  }
   
-//  }
-//  String info() {
-//    return null;
-//  }
+  float getRange() {
+    float range = getMax()-getMin();
+    println(range+" range");
+    return range;
+  }
+  String info() {
+    return null;
+  }
   
-////>>>>>>> .r67
 }

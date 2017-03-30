@@ -19,7 +19,7 @@ void settings()
 }
 void setup() 
 { 
-  
+
   backList = new ArrayList();
   color toolbarColor = color(150, 150, 150); 
   myFont = loadFont("Serif.plain-15.vlw");
@@ -27,30 +27,66 @@ void setup()
   toolbar = new Toolbar(toolbarColor, loadImage("backArrow.png"), loadImage("menu.png"), loadImage("homeButton.png"));
 
   createGraphScreen();
-  
+
   homeScreen = new Screen(BABY_BLUE);
   contactScreen = new Screen(PROCESS_YELLOW);
   townSelectScreen = new Screen(BEIGE);
   countySelectScreen = new Screen(LIGHT_GREEN);
   regionSelectScreen = new Screen(RASPBERRY_RED);
   optionScreen = new Screen(UNION_JACK_BLUE);
-  
-  
-  
-  
-  
-  
-  
-  
+
   homeScreen.addWidget(0, SCREENY / 2 - 200, SCREENX/4, 62, "Town", WOOD_BROWN, myFont, EVENT_TOWN_BUTTON);
-  homeScreen.addWidget(SCREENX / 4, SCREENY / 2 - 200 , SCREENX/4, 62, "County", SHAMROCK_GREEN, myFont, EVENT_COUNTY_BUTTON);
+  homeScreen.addWidget(SCREENX / 4, SCREENY / 2 - 200, SCREENX/4, 62, "County", SHAMROCK_GREEN, myFont, EVENT_COUNTY_BUTTON);
   homeScreen.addWidget(SCREENX/2, SCREENY / 2 - 200, SCREENX/4, 62, "Region", AMERICAN_RED, myFont, EVENT_REGION_BUTTON);
   homeScreen.addWidget(SCREENX-SCREENX/4, SCREENY / 2 - 200, SCREENX/4, 62, "Whole U.K.", UNION_JACK_BLUE, myFont, EVENT_UK_BUTTON); 
-  
+
   currentScreen = homeScreen;
   backList.add(currentScreen);
-}
 
+  db = new SQLite(this, "landdata.db");
+  if (db.connect())
+  {
+    db.query( "SELECT name as \"Name\" FROM SQLITE_MASTER where type=\"table\"" );
+  }
+  while (db.next())
+  {
+    println( db.getString("Name") );
+  }
+
+  int numberToReturn=10;
+  String search = "TYNE AND WEAR";
+  String type = "County";
+  //db.query( "SELECT * FROM registry WHERE "+type+" = '"+search+"' ORDER BY Price DESC LIMIT "+numberToReturn );
+  //float [] temp = new float[numberToReturn];
+  //for (int i=0; i<numberToReturn; i++)
+  //{
+  //  if (db.next()) {
+  //    temp[i] = parseFloat(db.getInt("Price"));
+  //    println(temp[i]);
+  //  } else 
+  //  println("not working");
+  //}
+  //int[] average = new int[20];
+  //for (int i=0; i<20; i++) {
+  //  db.query("SELECT AVG(Price) From registry WHERE "+type+" = '"+search+"' AND Date>='"+(1995+i)+"-01-01' and Date< '"+(1996+i)+"-01-01'");
+  //  if (db.next()) {
+  //    average[i] = db.getInt(1);
+  //    println(average[i]+" "+(1995+i));
+  //  }
+  //}
+  //float min =0;
+  //db.query("SELECT MIN(Price) From registry WHERE "+type+" = '"+search+"'");
+  //if (db.next())
+  //  min = db.getInt(1);
+  //println(min);
+  //float max =0;
+  //db.query("SELECT MAX(Price) From registry WHERE "+type+" = '"+search+"'");
+  //if (db.next())
+  //  max = db.getInt(1);
+  //println(max);
+  
+}
+//
 void draw() 
 {
   currentScreen.draw();
@@ -92,7 +128,6 @@ void mousePressed()
     backList.add(currentScreen);
     break;
   }
-  
 }
 
 void mouseMoved()
@@ -104,61 +139,23 @@ void createGraphScreen()
 {
   graphScreen = new Screen(WIDGET_RED);
   barChart = new BarChart(this);
-  db = new SQLite(this, "landdata.db");
-  if (db.connect())
-  {
-    db.query( "SELECT name as \"Name\" FROM SQLITE_MASTER where type=\"table\"" );
-  }
-  while (db.next())
-  {
-    println( db.getString("Name") );
-  }
-  //db.query( "SELECT * FROM registry" );
-  //int maxValue=0;
-  //float [] temp = new float[NUMBER_OF_ENTRIES];
-  //for (int i=0; i<NUMBER_OF_ENTRIES; i++)
-  //{
-  //  if (db.next()) {
-  //    temp[i] = parseFloat(db.getString("Price"));
-  //    if (temp[i]>maxValue) 
-  //    {
-  //      maxValue = int(temp[i]);
-  //    }
-  //  }
-  //}
 
-  //db.query( "SELECT * FROM registry ORDER BY Price DESC LIMIT 10" );
-  //int maxValue=0;
-  //float [] temp = new float[10];
-  //for (int i=0; i<10; i++)
-  //{
-  //  if (db.next()) {
-  //    temp[i] = parseFloat(db.getInt("Price"));
-  //    if (temp[i]>maxValue) 
-  //    {
-  //      maxValue = int(temp[i]);
-  //    }
-  //  }
-  //}
+  /*
 
-
-
-/*
-
-  barChart.setBarColour(color(200, 80, 80, 150));
-  barChart.setData(temp);
-
-  graphScreen = new Screen(255);
-
-  BarChart barChart = new BarChart(this);
-  barChart.setData(temp);
-
-  graphScreen.addBarChart(barChart);
-  barChart.setMinValue(0);
-  barChart.setMaxValue(maxValue);
-  barChart.showValueAxis(true);
-  barChart.setBarColour(color(200, 0, 200));
-
-  graphScreen.addText( SCREENX / 2 - 50, SCREENY - 90, "Prices over time");
-  */
+   barChart.setBarColour(color(200, 80, 80, 150));
+   barChart.setData(temp);
+   
+   graphScreen = new Screen(255);
+   
+   BarChart barChart = new BarChart(this);
+   barChart.setData(temp);
+   
+   graphScreen.addBarChart(barChart);
+   barChart.setMinValue(0);
+   barChart.setMaxValue(maxValue);
+   barChart.showValueAxis(true);
+   barChart.setBarColour(color(200, 0, 200));
+   
+   graphScreen.addText( SCREENX / 2 - 50, SCREENY - 90, "Prices over time");
+   */
 }
