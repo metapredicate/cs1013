@@ -1,6 +1,6 @@
 class BarChart
 {
-  private static final int MARGIN = 6;
+  private static final int BARCHART_MARGIN = 6;
   private int x, y, width, height, barWidth;
   private float[] xValues, yValues;
   private int[] barHeights;
@@ -21,21 +21,22 @@ class BarChart
 
     barList = new ArrayList();
 
-    barWidth = (width / xValues.length);
+    int numberOfSpaces = xValues.length - 2;
+    barWidth = ((width - (BARCHART_MARGIN * numberOfSpaces)) / xValues.length);
 
     calculateBarHeights();
     createBars();
   }
-  
+
   BarChart(int x, int y, float[] xValues, float[] yValues)
   {
-   this(x, y, 600, 360, xValues, yValues); 
+    this(x, y, 600, 360, xValues, yValues);
   }
 
   void calculateBarHeights()
   {
     barHeights = new int[yValues.length];
-    
+
     float maxY = 0;
     float minY = Float.MAX_VALUE;
     for (int i = 0; (i < yValues.length); i++)
@@ -57,18 +58,24 @@ class BarChart
   {
     for (int i = 0; (i < xValues.length); i++)
     {
-      int barX = x + (barWidth * i);
+      int barX = x + ((barWidth + BARCHART_MARGIN) * i);
       int barY = y + (height - (int) barHeights[i]);
       barList.add(new Bar(barX, barY, barWidth, (int) barHeights[i], color(255, 0, 0), 0));
     }
   }
-  
+
   void draw()
   {
-    for(int i = 0;(i < barList.size());i++)
+    for (int i = 0; (i < barList.size()); i++)
     {
-     Bar tmpBar = (Bar) barList.get(i);
-     tmpBar.draw();
+      Bar tmpBar = (Bar) barList.get(i);
+      tmpBar.draw();
+
+      fill(0);
+      textSize(12);
+      text("" + yValues[i] + "-", x - 58, tmpBar.getY() + 4);
     }
+    line(x, y, x, y + height);
+    line(x, y + height, x + width, y + height);
   }
 }

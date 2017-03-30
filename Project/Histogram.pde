@@ -22,7 +22,7 @@ class Histogram
     calculateWidthOfBars();
     createBars();
   }
-  
+
   Histogram(int x, int y, float[] values, int increment)
   {
     this(x, y, 600, 360, values, increment);
