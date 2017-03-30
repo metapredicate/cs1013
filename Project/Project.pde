@@ -69,10 +69,8 @@ void setup()
   String search = "CARDIFF";
   String type = "County";
   testing = new Query(search,type,db);
-  testing.getTop(10);
-  
+  testing.displayAverageOverTime();
 
-  
 }
 //
 void draw() 
