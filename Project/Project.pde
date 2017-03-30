@@ -3,7 +3,7 @@ import org.gicentre.utils.stat.*;
 import de.bezier.data.sql.*;
 
 ArrayList backList;
-
+Query testing;
 
 public GUIController c;
 
@@ -63,47 +63,15 @@ void setup()
   currentScreen = homeScreen;
   backList.add(currentScreen);
 
-  db = new SQLite(this, "landdata.db");
-  if (db.connect())
-  {
-    db.query( "SELECT name as \"Name\" FROM SQLITE_MASTER where type=\"table\"" );
-  }
-  while (db.next())
-  {
-    println( db.getString("Name") );
-  }
+  db = new SQLite( this, "landdata.db" );  
 
   int numberToReturn=10;
-  String search = "TYNE AND WEAR";
+  String search = "CARDIFF";
   String type = "County";
-  //db.query( "SELECT * FROM registry WHERE "+type+" = '"+search+"' ORDER BY Price DESC LIMIT "+numberToReturn );
-  //float [] temp = new float[numberToReturn];
-  //for (int i=0; i<numberToReturn; i++)
-  //{
-  //  if (db.next()) {
-  //    temp[i] = parseFloat(db.getInt("Price"));
-  //    println(temp[i]);
-  //  } else 
-  //  println("not working");
-  //}
-  //int[] average = new int[20];
-  //for (int i=0; i<20; i++) {
-  //  db.query("SELECT AVG(Price) From registry WHERE "+type+" = '"+search+"' AND Date>='"+(1995+i)+"-01-01' and Date< '"+(1996+i)+"-01-01'");
-  //  if (db.next()) {
-  //    average[i] = db.getInt(1);
-  //    println(average[i]+" "+(1995+i));
-  //  }
-  //}
-  //float min =0;
-  //db.query("SELECT MIN(Price) From registry WHERE "+type+" = '"+search+"'");
-  //if (db.next())
-  //  min = db.getInt(1);
-  //println(min);
-  //float max =0;
-  //db.query("SELECT MAX(Price) From registry WHERE "+type+" = '"+search+"'");
-  //if (db.next())
-  //  max = db.getInt(1);
-  //println(max);
+  testing = new Query(search,type,db);
+  testing.getTop(10);
+  
+
   
 }
 //
@@ -111,6 +79,8 @@ void draw()
 {
   currentScreen.draw();
   toolbar.draw();
+  if(testing!=null)
+    testing.draw();
 }
 
 void mousePressed()
@@ -159,7 +129,7 @@ void mouseMoved()
 void createGraphScreen()
 {
   graphScreen = new Screen(WIDGET_RED);
-  barChart = new BarChart(this);
+  //barChart = new BarChart(this);
 
   /*
 

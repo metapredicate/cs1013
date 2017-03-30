@@ -1,7 +1,4 @@
-<<<<<<< .mine
-=======
-/*
->>>>>>> .r73
+
 class Screen
 {
   private String graphLabel;
@@ -55,7 +52,7 @@ class Screen
     for (int i = 0; (i < barChartList.size()); i++)
     {
       BarChart aBarChart = (BarChart) barChartList.get(i);
-      aBarChart.draw(SCREENX / 2 - 360, SCREENY / 2 - 240, 720, 480);
+      //aBarChart.draw(SCREENX / 2 - 360, SCREENY / 2 - 240, 720, 480);
     }
     fill(0);
     text(graphLabel, labelX, labelY);
