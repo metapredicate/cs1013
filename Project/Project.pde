@@ -1,7 +1,11 @@
+import interfascia.*;
 import org.gicentre.utils.stat.*;
 import de.bezier.data.sql.*;
 
 ArrayList backList;
+
+
+public GUIController c;
 
 PFont myFont;
 PFont baskerville;
@@ -9,6 +13,7 @@ PropertyEntry[] propertyArray;
 SQLite db;
 BarChart barChart;
 Toolbar toolbar;
+PImage homeBG;
 
 public boolean dropped = false;
 public Screen homeScreen, townSelectScreen, countySelectScreen, regionSelectScreen, optionScreen, currentScreen, contactScreen, graphScreen;
@@ -19,27 +24,42 @@ void settings()
 }
 void setup() 
 { 
-
+  c = new GUIController(this);
   backList = new ArrayList();
   color toolbarColor = color(150, 150, 150); 
   myFont = loadFont("Serif.plain-15.vlw");
   baskerville = loadFont("Baskerville-Bold-48.vlw");
   toolbar = new Toolbar(toolbarColor, loadImage("backArrow.png"), loadImage("menu.png"), loadImage("homeButton.png"));
-
+  homeBG = loadImage("background1.png");
+  homeBG.resize(SCREENX,SCREENY);
   createGraphScreen();
 
-  homeScreen = new Screen(BABY_BLUE);
+  homeScreen = new Screen(homeBG);
   contactScreen = new Screen(PROCESS_YELLOW);
   townSelectScreen = new Screen(BEIGE);
   countySelectScreen = new Screen(LIGHT_GREEN);
   regionSelectScreen = new Screen(RASPBERRY_RED);
   optionScreen = new Screen(UNION_JACK_BLUE);
-
+  
+  
+  
+  
+  
+  
+  // HOME SCREEN
+  
   homeScreen.addWidget(0, SCREENY / 2 - 200, SCREENX/4, 62, "Town", WOOD_BROWN, myFont, EVENT_TOWN_BUTTON);
   homeScreen.addWidget(SCREENX / 4, SCREENY / 2 - 200, SCREENX/4, 62, "County", SHAMROCK_GREEN, myFont, EVENT_COUNTY_BUTTON);
   homeScreen.addWidget(SCREENX/2, SCREENY / 2 - 200, SCREENX/4, 62, "Region", AMERICAN_RED, myFont, EVENT_REGION_BUTTON);
   homeScreen.addWidget(SCREENX-SCREENX/4, SCREENY / 2 - 200, SCREENX/4, 62, "Whole U.K.", UNION_JACK_BLUE, myFont, EVENT_UK_BUTTON); 
 
+  // TOWN SELECT SCREEN
+  
+  //if(currentScreen==townSelectScreen)
+  //{
+    townSelectScreen.addIFTextField("Search", SCREENX/2, SCREENY/2);
+  //}
+  
   currentScreen = homeScreen;
   backList.add(currentScreen);
 
@@ -112,6 +132,7 @@ void mousePressed()
     break;
   case EVENT_UK_BUTTON:
     currentScreen = graphScreen;
+    backList.add(currentScreen);
     break;
   }
   switch(toolbar.getEvent())

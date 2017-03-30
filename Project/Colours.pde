@@ -15,5 +15,8 @@ public color SHAMROCK_GREEN     = color(0, 158, 96);
 public color LIGHT_GREEN        = color(144, 238, 144);
 //REGION
 public color AMERICAN_RED       = color(220, 20, 60);
-public color RASPBERRY_RED        = color(227, 11, 92);
+public color RASPBERRY_RED      = color(227, 11, 92);
 //OPTION
+
+//CONDITION COLOR - DO NOT USE THIS COLOR
+public color CONDITION          = color(1,1,1);
