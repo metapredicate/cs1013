@@ -1,4 +1,4 @@
-/*
+
 class Toolbar
 {
   final int MARGIN = 2;
@@ -89,7 +89,7 @@ class Toolbar
   {
     if (toolbar.getEvent() == EVENT_DROP)
       dropped = true;
-    else if (/*dropped &&*/ /*( toolbar.getEvent() == EVENT_QUERY1 ))
+    else if (/*dropped &&*/ ( toolbar.getEvent() == EVENT_QUERY1 ))
       query1.setStrokeColor(255);
     else if( toolbar.getEvent() == EVENT_QUERY2 ) 
       query2.setStrokeColor(255);
@@ -121,4 +121,3 @@ class Toolbar
     return EVENT_NULL;
   }
 }
-*/

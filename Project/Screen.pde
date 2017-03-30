@@ -1,7 +1,10 @@
+//<<<<<<< .mine
+//=======
 
 
 
 
+//>>>>>>> .r80
 class Screen
 {
   private String graphLabel;
@@ -121,4 +124,4 @@ class Screen
     }
   }
 }
-*/
+//*/

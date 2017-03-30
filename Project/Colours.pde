@@ -15,8 +15,12 @@ public color SHAMROCK_GREEN     = color(0, 158, 96);
 public color LIGHT_GREEN        = color(144, 238, 144);
 //REGION
 public color AMERICAN_RED       = color(220, 20, 60);
-public color RASPBERRY_RED      = color(227, 11, 92);
+public color PIGGY_PINK         = color(253, 221, 230);
 //OPTION
+public color RASPBERRY_RED      = color(227, 11, 92);
+public color LIBERTY_BLUE       = color(84, 90, 167);
+public color MALACHITE          = color(11, 218, 81);
+
 
 //CONDITION COLOR - DO NOT USE THIS COLOR
 public color CONDITION          = color(1,1,1);
