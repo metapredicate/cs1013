@@ -74,5 +74,6 @@ class Widget
   void setFontSize(int fontSize)
   {
     this.fontSize = fontSize;
+
   }
 }

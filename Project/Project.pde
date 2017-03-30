@@ -67,7 +67,7 @@ void setup()
 
   int numberToReturn=10;
   String search = "CARDIFF";
-  String type = "County";
+  String type = "All";
   testing = new Query(search,type,db);
   testing.displayAverageOverTime();
 
@@ -124,17 +124,15 @@ void mouseMoved()
   toolbar.mouseMoved();
 }
 
-<<<<<<< .mine
+
 //void createGraphScreen()
 //{
 //  graphScreen = new Screen(WIDGET_RED);
 //  barChart = new BarChart(this);
-=======
 void createGraphScreen()
 {
   graphScreen = new Screen(WIDGET_RED);
   //barChart = new BarChart(this);
->>>>>>> .r76
 
 //  /*
 
@@ -154,4 +152,4 @@ void createGraphScreen()
    
 //   graphScreen.addText( SCREENX / 2 - 50, SCREENY - 90, "Prices over time");
 //   */
-//}
+}

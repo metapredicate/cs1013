@@ -1,5 +1,7 @@
 
->>>>>>> .r76
+
+
+
 class Screen
 {
   private String graphLabel;
