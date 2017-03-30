@@ -1,4 +1,4 @@
-
+/*
 class Screen
 {
   private String graphLabel;

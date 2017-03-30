@@ -21,16 +21,25 @@ class Widget
     strokeColor = color(0);
     labelColor= color(255);
   }
+  
+  Widget(int x, int y, int width, int height, color widgetColor, int event)
+  {
+    this(x, y, width, height, null, widgetColor, null, event);
+  }
+  
   void draw()
   {
     stroke(strokeColor);
     fill(widgetColor);
     rect(x, y, width, height);
-
-    fill(labelColor);
-    textFont(widgetFont);
-    textSize(fontSize);
-    text(label, x+10, y+height-10);
+    
+    if(label != null)
+    {
+      fill(labelColor);
+      textFont(widgetFont);
+      textSize(fontSize);
+      text(label, x+10, y+height-10);
+    }
   }
   int getEvent(int mX, int mY)
   {
