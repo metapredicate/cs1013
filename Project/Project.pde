@@ -2,6 +2,7 @@
 import interfascia.*;
 import org.gicentre.utils.stat.*;
 import de.bezier.data.sql.*;
+import org.gicentre.geomap.*;
 
 ArrayList backList;
 Query testing;
