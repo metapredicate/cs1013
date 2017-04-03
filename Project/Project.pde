@@ -19,6 +19,9 @@ PImage homeBG;
 
 public boolean dropped = false;
 public Screen homeScreen, townSelectScreen, countySelectScreen, regionSelectScreen, optionScreen, currentScreen, contactScreen, graphScreen;
+public Query currentQuery, top10Query, bot10Query, averageQuery;
+public String search, type;
+
 
 void settings() 
 {
@@ -37,8 +40,8 @@ void setup()
   homeBG.resize(SCREENX,SCREENY);
   //createGraphScreen();
 
-  Query averageQuery = new Query("CARDIFF", "All", db);
-
+  String search = "CARDIFF";
+  String type = "Town";
 
 
   homeScreen = new Screen(homeBG);
@@ -49,11 +52,10 @@ void setup()
   optionScreen = new Screen(BABY_BLUE);
   
   //if(currentScreen == townSelectScreen)
-  //{
-   averageQuery.displayTop(10); 
+  //{ 
   //}
-  
-  
+  Query top10Query = new Query("CARDIFF, 
+  currentQuery = top10Query;
   
   
   // HOME SCREEN
@@ -67,7 +69,11 @@ void setup()
   
   //if(currentScreen==townSelectScreen)
   //{
-    townSelectScreen.addIFTextField("Search", SCREENX/2-180, SCREENY/2, 360, 40);
+    townSelectScreen.addIFTextField("Search", SCREENX/2-180, SCREENY - 100, 360, 40);
+    townSelectScreen.addWidget(0, SCREENY / 2 - 300, SCREENX/4, 62, "Highest Priced", WOOD_BROWN, myFont, EVENT_TOP10_BUTTON);
+    townSelectScreen.addWidget(SCREENX / 4, SCREENY / 2 - 300, SCREENX/4, 62, "Lowest Priced", WOOD_BROWN, myFont, EVENT_BOT10_BUTTON);
+    townSelectScreen.addWidget(SCREENX / 2, SCREENY / 2 - 300, SCREENX/4, 62, "Average Prices Over Time", AMERICAN_RED, myFont, EVENT_AVG_BUTTON);
+    townSelectScreen.addWidget(SCREENX * 3 / 4, SCREENY / 2 - 300, SCREENX/4, 62, "Area Statistics", AMERICAN_RED, myFont, EVENT_STAT_BUTTON);
   //}
   
   currentScreen = homeScreen;
@@ -96,7 +102,6 @@ void mousePressed()
   switch(currentScreen.getEvent())
   {
   case EVENT_TOWN_BUTTON:
-  case EVENT_QUERY1:
     currentScreen = townSelectScreen;
     backList.add(currentScreen);
     break;
@@ -112,6 +117,14 @@ void mousePressed()
     currentScreen = optionScreen;
     backList.add(currentScreen);
     break;
+  case EVENT_AVG_BUTTON:
+    if(averageQuery == null)
+    {
+      Query averageQuery = new Query(search, type, db);
+    }
+     currentQuery = averageQuery;
+     currentQuery.displayAverageOverTime();
+    
   }
   switch(toolbar.getEvent())
   {

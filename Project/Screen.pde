@@ -91,7 +91,7 @@ class Screen
     }
     return EVENT_NULL;
   }
-
+  
   void addWidget(int x, int y, int width, int height, String label, color widgetColor, PFont widgetFont, int event)
   {
     widgetList.add(new Widget(x, y, width, height, label, widgetColor, widgetFont, event));
