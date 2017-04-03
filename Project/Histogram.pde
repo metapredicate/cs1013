@@ -84,7 +84,7 @@ class Histogram
       float r = map(yValues[i], 0, maxY, 100, 220);
       color barColor = color(r, 0, 0);
       
-      barList.add(new Bar(barX, barY, barWidth, (int) barHeight, barColor, yValues[i], "Histogram"));
+      barList.add(new Bar(barX, barY, barWidth, (int) barHeight, barColor, yValues[i], "Histogram", y + height + 30));
     }
   }
 

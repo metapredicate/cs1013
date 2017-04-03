@@ -17,8 +17,6 @@ class BarChart
     this.height = height;
     this.xValues = xValues;
     this.yValues = yValues;
-    
-    this.heightForBars = height - MIN_BAR_HEIGHT;
 
     if (xValues.length != yValues.length)
       throw new IllegalArgumentException();
@@ -51,10 +49,13 @@ class BarChart
         minY = yValues[i];
     }
 
+    this.heightForBars = ((minY == 0)? height : height - MIN_BAR_HEIGHT);
+    System.out.println("" + heightForBars);
+  
     float diffMaxMin = maxY - minY;
     for (int i = 0; (i < yValues.length); i++)
     {
-      barHeights[i] = (int) ((((yValues[i] - minY) * heightForBars) / diffMaxMin) + MIN_BAR_HEIGHT);
+      barHeights[i] = (int) ((((yValues[i] - minY) * heightForBars) / diffMaxMin) + ((minY == 0)? 0 : MIN_BAR_HEIGHT));
     }
     
     quarterValue = (diffMaxMin /4);
@@ -67,8 +68,8 @@ class BarChart
       int barX = x + ((barWidth + BARCHART_MARGIN) * i);
       int barY = y + (height - (int) barHeights[i]);
       float r = map(yValues[i], minY, maxY, 100, 220);
-      color barColor = color(r, 0, 0);
-      barList.add(new Bar(barX, barY, barWidth, (int) barHeights[i], barColor, yValues[i], "BarChart"));
+      color barColor = color(r, 0, 0);;
+      barList.add(new Bar(barX, barY, barWidth, (int) barHeights[i], barColor, yValues[i], "BarChart", y + height + 30));
     }
   }
 
@@ -91,7 +92,7 @@ class BarChart
       int lineY = y + ((heightForBars / 4) * quarter);
       line(x, lineY, x - 6, lineY);
       float value = maxY - (quarterValue * quarter); 
-      text("" + value, x - 80, lineY);
+      text("£" + value, x - 88, lineY);
     }
   }
 }
