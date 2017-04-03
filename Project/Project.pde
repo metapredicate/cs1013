@@ -2,7 +2,7 @@
 import interfascia.*;
 import org.gicentre.utils.stat.*;
 import de.bezier.data.sql.*;
-//import org.gicentre.geomap.*;
+import org.gicentre.geomap.*;
 
 ArrayList backList;
 Query testing;
@@ -47,7 +47,7 @@ void setup()
   homeScreen = new Screen(homeBG);
   contactScreen = new Screen(PROCESS_YELLOW);
   townSelectScreen = new Screen(BEIGE, averageQuery);
-  countySelectScreen = new Screen(LIGHT_GREEN);
+  countySelectScreen = new Screen(this);
   regionSelectScreen = new Screen(RASPBERRY_RED);
   optionScreen = new Screen(BABY_BLUE);
 
@@ -95,10 +95,14 @@ void draw()
   toolbar.draw();
   if (testing!=null)
     testing.draw();
+    
 }
 
 void mousePressed()
 {
+  if(currentScreen == countySelectScreen) {
+    currentScreen.mousePressed();
+  }
   switch(currentScreen.getEvent())
   {
   case EVENT_TOWN_BUTTON:

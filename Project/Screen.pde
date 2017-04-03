@@ -11,6 +11,7 @@ class Screen
   IFTextField t;
   IFLabel l;
   Query currentQuery;
+  Map myMap;
   
   Screen(color backgroundColor)
   {
@@ -33,10 +34,6 @@ class Screen
     labelX = 0;
     labelY = 0;
   }
-
-
-
-
   Screen(PImage backgroundImage)
   {
     this.imageUsed = true;
@@ -47,7 +44,15 @@ class Screen
     labelX = 0;
     labelY = 0;
   }
-
+  Screen(PApplet thisApplet) {
+    myMap = new Map(thisApplet);
+    widgetList = new ArrayList();
+    barChartList = new ArrayList();
+    graphLabel = "";
+    labelX = 0;
+    labelY = 0;
+  }
+    
   void draw()
   {
     if( imageUsed )
@@ -72,6 +77,9 @@ class Screen
     {
       BarChart aBarChart = (BarChart) barChartList.get(i);
       //aBarChart.draw(SCREENX / 2 - 360, SCREENY / 2 - 240, 720, 480);
+    }
+    if(myMap!=null){
+      myMap.draw();
     }
     fill(0);
     text(graphLabel, labelX, labelY);
@@ -134,6 +142,11 @@ class Screen
         aWidget.setStrokeColor(color(255));
       else
         aWidget.setStrokeColor(color(0));
+    }
+  }
+  void mousePressed() {
+    if(myMap!=null){
+      myMap.mousePressed();
     }
   }
 }
