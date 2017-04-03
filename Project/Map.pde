@@ -1,6 +1,5 @@
-
+/*
 GeoMap geoMap;
-
 void setup()
 {
   size(800, 800);
@@ -37,3 +36,4 @@ void draw()
     text(name, mouseX+5, mouseY-5);
   }
 }
+*/

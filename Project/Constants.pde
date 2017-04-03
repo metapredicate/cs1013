@@ -3,6 +3,10 @@ final int SCREENY = 768;
 final int NUMBER_OF_ENTRIES = 1000;
 
 final int EVENT_NULL = -1;
+
+//This duplicate should not effect the functionality of any class. It is soley used in the Bar class
+final int BAR_EVENT = 1;
+
 final int EVENT_TOWN_BUTTON = 1;
 final int EVENT_COUNTY_BUTTON = 2;
 final int EVENT_REGION_BUTTON = 3;
