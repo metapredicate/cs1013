@@ -2,7 +2,7 @@
 import interfascia.*;
 import org.gicentre.utils.stat.*;
 import de.bezier.data.sql.*;
-import org.gicentre.geomap.*;
+//import org.gicentre.geomap.*;
 
 ArrayList backList;
 Query testing;
@@ -37,7 +37,7 @@ void setup()
   baskerville = loadFont("Baskerville-Bold-48.vlw");
   toolbar = new Toolbar(toolbarColor, loadImage("backArrow.png"), loadImage("menu.png"), loadImage("homeButton.png"));
   homeBG = loadImage("background1.png");
-  homeBG.resize(SCREENX,SCREENY);
+  homeBG.resize(SCREENX, SCREENY);
   //createGraphScreen();
 
   String search = "CARDIFF";
@@ -50,50 +50,50 @@ void setup()
   countySelectScreen = new Screen(LIGHT_GREEN);
   regionSelectScreen = new Screen(RASPBERRY_RED);
   optionScreen = new Screen(BABY_BLUE);
-  
+
   //if(currentScreen == townSelectScreen)
   //{ 
   //}
-  Query top10Query = new Query("CARDIFF, 
+  Query top10Query = new Query("CARDIFF", "Town", db);
   currentQuery = top10Query;
-  
-  
+
+
   // HOME SCREEN
-  
+
   homeScreen.addWidget(0, SCREENY / 2 - 200, SCREENX/4, 62, "Town", WOOD_BROWN, myFont, EVENT_TOWN_BUTTON);
   homeScreen.addWidget(SCREENX / 4, SCREENY / 2 - 200, SCREENX/4, 62, "County", SHAMROCK_GREEN, myFont, EVENT_COUNTY_BUTTON);
   homeScreen.addWidget(SCREENX/2, SCREENY / 2 - 200, SCREENX/4, 62, "Region", AMERICAN_RED, myFont, EVENT_REGION_BUTTON);
   homeScreen.addWidget(SCREENX-SCREENX/4, SCREENY / 2 - 200, SCREENX/4, 62, "Whole U.K.", UNION_JACK_BLUE, myFont, EVENT_UK_BUTTON); 
 
   // TOWN SELECT SCREEN
-  
+
   //if(currentScreen==townSelectScreen)
   //{
-    townSelectScreen.addIFTextField("Search", SCREENX/2-180, SCREENY - 100, 360, 40);
-    townSelectScreen.addWidget(0, SCREENY / 2 - 300, SCREENX/4, 62, "Highest Priced", WOOD_BROWN, myFont, EVENT_TOP10_BUTTON);
-    townSelectScreen.addWidget(SCREENX / 4, SCREENY / 2 - 300, SCREENX/4, 62, "Lowest Priced", WOOD_BROWN, myFont, EVENT_BOT10_BUTTON);
-    townSelectScreen.addWidget(SCREENX / 2, SCREENY / 2 - 300, SCREENX/4, 62, "Average Prices Over Time", AMERICAN_RED, myFont, EVENT_AVG_BUTTON);
-    townSelectScreen.addWidget(SCREENX * 3 / 4, SCREENY / 2 - 300, SCREENX/4, 62, "Area Statistics", AMERICAN_RED, myFont, EVENT_STAT_BUTTON);
+  townSelectScreen.addIFTextField("Search", SCREENX/2-180, SCREENY - 100, 360, 40);
+  townSelectScreen.addWidget(0, SCREENY / 2 - 300, SCREENX/4, 62, "Highest Priced", WOOD_BROWN, myFont, EVENT_TOP10_BUTTON);
+  townSelectScreen.addWidget(SCREENX / 4, SCREENY / 2 - 300, SCREENX/4, 62, "Lowest Priced", WOOD_BROWN, myFont, EVENT_BOT10_BUTTON);
+  townSelectScreen.addWidget(SCREENX / 2, SCREENY / 2 - 300, SCREENX/4, 62, "Average Prices Over Time", AMERICAN_RED, myFont, EVENT_AVG_BUTTON);
+  townSelectScreen.addWidget(SCREENX * 3 / 4, SCREENY / 2 - 300, SCREENX/4, 62, "Area Statistics", AMERICAN_RED, myFont, EVENT_STAT_BUTTON);
   //}
-  
+
   currentScreen = homeScreen;
   backList.add(currentScreen);
 
-  
+
 
   //int numberToReturn=10;
   //String search = "CARDIFF";
   //String type = "County";
   //testing = new Query(search,type,db);
   //testing.displayAverageOverTime();
-
 }
+
 //
 void draw() 
 {
   currentScreen.draw();
   toolbar.draw();
-  if(testing!=null)
+  if (testing!=null)
     testing.draw();
 }
 
@@ -118,13 +118,12 @@ void mousePressed()
     backList.add(currentScreen);
     break;
   case EVENT_AVG_BUTTON:
-    if(averageQuery == null)
+    if (averageQuery == null)
     {
       Query averageQuery = new Query(search, type, db);
     }
-     currentQuery = averageQuery;
-     currentQuery.displayAverageOverTime();
-    
+    currentQuery = averageQuery;
+    currentQuery.displayAverageOverTime();
   }
   switch(toolbar.getEvent())
   {
