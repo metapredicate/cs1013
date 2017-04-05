@@ -104,7 +104,7 @@ class Query
   }
   float getMax() {
     float max =0;
-    db.query("SELECT MAX(Price) From registry WHERE "+type+" = '"+search+"'");
+    db.query("SELECT MAX(Price) From registry WHERE "+type+" = "+search+"");
     if (db.next())
       max = db.getInt(1);
     return max;
