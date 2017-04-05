@@ -40,8 +40,8 @@ class Map {
     {
       String name = geoMap.getAttributeTable().findRow(str(id), 0).getString("NAME_2");    
       
-      name.toUpperCase();
-      println(name);
+      name = name.toUpperCase();
+      println("" + name);
       search = name;
       type = "County";
       currentQuery = new Query(search, type, db);
