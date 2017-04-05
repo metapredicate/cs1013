@@ -1,4 +1,3 @@
-
 class Map {
   GeoMap geoMap;
   Map(PApplet thisApplet)
@@ -40,7 +39,13 @@ class Map {
     if ((id != -1)&&((id<113)||(id>170)))
     {
       String name = geoMap.getAttributeTable().findRow(str(id), 0).getString("NAME_2");    
+      
+      name.toUpperCase();
       println(name);
+      search = name;
+      type = "County";
+      currentQuery = new Query(search, type, db);
+      currentScreen = townSelectScreen;
     }
   }
 }

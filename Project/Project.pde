@@ -1,4 +1,3 @@
-
 import interfascia.*;
 import org.gicentre.utils.stat.*;
 import de.bezier.data.sql.*;
@@ -30,7 +29,7 @@ void settings()
 void setup() 
 { 
   db = new SQLite( this, "landdata.db" );   //<>//
-  c = new GUIController(this);
+  c = new GUIController(this); //<>//
   backList = new ArrayList();
   color toolbarColor = color(150, 150, 150); 
   myFont = loadFont("Serif.plain-15.vlw");
@@ -46,7 +45,7 @@ void setup()
 
   homeScreen = new Screen(homeBG);
   contactScreen = new Screen(PROCESS_YELLOW);
-  townSelectScreen = new Screen(BEIGE, averageQuery);
+  townSelectScreen = new Screen(BEIGE);
   countySelectScreen = new Screen(this);
   regionSelectScreen = new Screen(RASPBERRY_RED);
   optionScreen = new Screen(BABY_BLUE);

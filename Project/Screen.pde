@@ -1,5 +1,3 @@
-
-
 class Screen
 {
   private String graphLabel;
@@ -23,17 +21,7 @@ class Screen
     labelX = 0;
     labelY = 0;
   }
-  
-  Screen(color backgroundColor, Query currentQuery)
-  {
-    this.backgroundColor = backgroundColor;
-    this.currentQuery = currentQuery;
-    widgetList = new ArrayList();
-    barChartList = new ArrayList();
-    graphLabel = "";
-    labelX = 0;
-    labelY = 0;
-  }
+
   Screen(PImage backgroundImage)
   {
     this.imageUsed = true;
