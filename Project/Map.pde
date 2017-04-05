@@ -15,11 +15,9 @@ class Map {
     background(OCEAN_BLUE);  
     stroke(0, 40);             
 
-    // Draw entire world map.
     fill(SHAMROCK_GREEN);        
     geoMap.draw();              
 
-    // Query the country at the mouse position.
     int id = geoMap.getID(mouseX, mouseY);
     if ((id != -1)&&((id<113)||(id>170)))
     {
@@ -39,7 +37,7 @@ class Map {
       println(name);
       search = name;
       type = "County";
-      currentQuery = new Query(search, type, db);
+      currentQuery = new Query(search, type);
       currentScreen = townSelectScreen;
     }
   }
