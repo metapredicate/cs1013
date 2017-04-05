@@ -28,8 +28,8 @@ void settings()
 }
 void setup() 
 { 
-  db = new SQLite( this, "landdata.db" );   //<>//
-  c = new GUIController(this); //<>// //<>//
+  db = new SQLite( this, "landdata.db" );   //<>// //<>//
+  c = new GUIController(this); //<>// //<>// //<>//
   backList = new ArrayList();
   color toolbarColor = color(150, 150, 150); 
   myFont = loadFont("Serif.plain-15.vlw");
@@ -77,14 +77,6 @@ void setup()
 
   currentScreen = homeScreen;
   backList.add(currentScreen);
-
-
-
-  //int numberToReturn=10;
-  //String search = "CARDIFF";
-  //String type = "County";
-  //testing = new Query(search,type,db);
-  //testing.displayAverageOverTime();
 }
 
 //
@@ -92,19 +84,17 @@ void draw()
 {
   currentScreen.draw();
   toolbar.draw();
-  
+
   if (testing!=null)
     testing.draw();
-    
-  if(currentScreen == townSelectScreen)
-    currentQuery.draw();
 
-    
+  if (currentScreen == townSelectScreen)
+    currentQuery.draw();
 }
 
 void mousePressed()
 {
-  if(currentScreen == countySelectScreen) {
+  if (currentScreen == countySelectScreen) {
     currentScreen.mousePressed();
   }
   switch(currentScreen.getEvent())
@@ -128,6 +118,8 @@ void mousePressed()
     currentScreen = optionScreen;
     backList.add(currentScreen);
     type = "All";
+    currentQuery = new Query(search, type, db);
+    currentScreen = townSelectScreen;
     break;
   case EVENT_AVG_BUTTON:
     currentQuery.displayAverageOverTime();
