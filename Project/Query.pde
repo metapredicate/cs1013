@@ -50,8 +50,7 @@ class Query
         temp[i] = parseFloat(db.getInt("Price"));
       }
     }
-    float[] xAxix = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    chart = new BarChart(200, 200, 600, 360, xAxix, temp);
+    chart = new BarChart(200, 200, 600, 360, temp);
   }
   void displayBottom(int numberToReturn) {
     db.query( "SELECT * FROM registry WHERE "+type+" = "+search+" ORDER BY Price ASC LIMIT "+numberToReturn );
@@ -62,8 +61,7 @@ class Query
         temp[i] = parseFloat(db.getInt("Price"));
       }
     }
-    float[] xAxix = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    chart = new BarChart(200, 200, 600, 360, xAxix, temp);
+    chart = new BarChart(200, 200, 600, 360, temp);
   }
   void displayAverageOverTime() {
     float[] average = new float[20];
@@ -74,8 +72,13 @@ class Query
         println(average+" "+(1995+i));
       }
     }
-    float[] xAxix = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
-    chart = new BarChart(200, 200, 600, 360, xAxix, average);
+    String[] xAxis = new String[20];
+    for(int i = 0;(i < 20);i++)
+    {
+      int year = 1995 + i;
+      xAxis[i] = ("" + year);
+    }
+    chart = new BarChart(200, 200, 600, 360, xAxis, average, true);
   }
   void displayStats() {
     float average = getAverage();
