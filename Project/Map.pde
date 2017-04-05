@@ -1,26 +1,23 @@
+
 class Map {
   GeoMap geoMap;
   Map(PApplet thisApplet)
   {
-    geoMap = new GeoMap(thisApplet);
+    geoMap = new GeoMap(0,0,height,height,thisApplet);
     geoMap.readFile("GBR_adm2");
 
-    // Set up text appearance.
     textAlign(LEFT, BOTTOM);
     textSize(18);
-
-    // Display the first 5 rows of attributes in the console.
-    geoMap.writeAttributesAsTable(200);
   }
 
   void draw()
   {
-    background(202, 226, 245);  // Ocean colour
-    stroke(0, 40);              // Boundary colour
+    background(OCEAN_BLUE);  
+    stroke(0, 40);             
 
     // Draw entire world map.
-    fill(206, 173, 146);        // Land colour
-    geoMap.draw();              // Draw the entire map.
+    fill(SHAMROCK_GREEN);        
+    geoMap.draw();              
 
     // Query the country at the mouse position.
     int id = geoMap.getID(mouseX, mouseY);
@@ -39,9 +36,7 @@ class Map {
     if ((id != -1)&&((id<113)||(id>170)))
     {
       String name = geoMap.getAttributeTable().findRow(str(id), 0).getString("NAME_2");    
-      
-      name = name.toUpperCase();
-      println("" + name);
+      println(name);
       search = name;
       type = "County";
       currentQuery = new Query(search, type, db);
