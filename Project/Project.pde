@@ -26,10 +26,19 @@ void settings()
 {
   size(SCREENX, SCREENY);
 }
+
+void loadingScreen()
+{ //<>//
+ background(0); //<>//
+ textSize(50);
+ text("loading...", 10, SCREENY - 30);
+}
+
 void setup() 
 { 
-  db = new SQLite( this, "landdata.db" );   //<>// //<>//
-  c = new GUIController(this); //<>// //<>// //<>//
+  loadingScreen();
+  db = new SQLite( this, "landdata.db" );  
+  c = new GUIController(this); 
   backList = new ArrayList();
   color toolbarColor = color(150, 150, 150); 
   myFont = loadFont("Serif.plain-15.vlw");
@@ -89,7 +98,12 @@ void draw()
     testing.draw();
 
   if (currentScreen == townSelectScreen)
+  {
     currentQuery.draw();
+    textSize(24);
+    fill(0);
+    text("Viewing results for " + search + " " + type, 10, 60);
+  }
 }
 
 void mousePressed()
