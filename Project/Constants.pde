@@ -20,7 +20,7 @@ final int EVENT_BOT10_BUTTON = 12;
 final int EVENT_AVG_BUTTON = 13;
 final int EVENT_STAT_BUTTON = 14;
 
-//final int = 15;
+final int EVENT_APRES_TOWN_BUTTON = 15;
 //final int = 16;
 //final int = 17;
 //final int = 18;

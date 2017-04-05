@@ -6,9 +6,11 @@ class Screen
   color backgroundColor = CONDITION;
   PImage backgroundImage;
   Boolean imageUsed = false;
-  IFTextField t;
-  IFLabel l;
+  GUIController gui = new GUIController(main);
+  IFTextField searchbar;
+  IFLabel label;
   Map myMap;
+  String searchText;
   
   Screen(color backgroundColor)
   {
@@ -36,9 +38,31 @@ class Screen
     labelX = 0;
     labelY = 0;
   }
+  Screen(PApplet thisApplet, color backgroundColor) {
+    this.backgroundColor = backgroundColor;
+    myMap = new Map(thisApplet);
+    widgetList = new ArrayList();
+    graphLabel = "";
+    labelX = 0;
+    labelY = 0;
+  }
+  Screen(PApplet thisApplet, PImage backgroundImage) {
+    this.backgroundImage = backgroundImage;
+    this.imageUsed = true;
+    myMap = new Map(thisApplet);
+    widgetList = new ArrayList();
+    graphLabel = "";
+    labelX = 0;
+    labelY = 0;
+  }
     
   void draw()
   {
+   if( (currentScreen != townSelectScreen) && searchbarIsDisplayed )
+   {
+     searchbarIsDisplayed = false;
+     townSelectScreen.hideSearchBar();
+   }
     if( imageUsed )
     {
       background(backgroundImage);
@@ -60,6 +84,7 @@ class Screen
     fill(0);
     text(graphLabel, labelX, labelY);
   }
+
   
   int getEvent()
   {
@@ -80,26 +105,32 @@ class Screen
   {
     widgetList.add(new Widget(x, y, width, height, label, widgetColor, widgetFont, event));
   }
-
+  void showSearchBar()
+  {
+    int x = SCREENX/2-180;
+    int y = SCREENY/2;
+    int barWidth = 360;
+    int barHeight = 40;
+    IFTextField searchbar = new IFTextField("Search", x, y);
+    //IFLabel label = new IFLabel( "Search", x+barWidth/2 -15, y-15);
+    searchbar.setSize(barWidth, barHeight);
+    this.searchbar = searchbar;
+    //this.label = label;
+    gui.add(this.searchbar);
+    //gui.add(this.label);
+  }
+  void hideSearchBar()
+  {
+    gui.remove(this.searchbar);
+    //gui.remove(this.label);
+    
+  }
 
   void addText(int x, int y, String title)
   {
     graphLabel = title;
     labelX = x;
     labelY = y;
-  }
-  
-  void addIFTextField(String string, int x, int y, int barWidth, int barHeight)
-  {
-
-    this.t = new IFTextField(string, x, y);
-    this.l = new IFLabel("Search", x+barWidth/2 -15, y-15);
-    this.t.setSize(barWidth, barHeight);
-   // t = new IFTextField(string,x,y);
-    c.add(t);
-    c.add(l);
-    
-    t.addActionListener(this);
   }
   void mouseMoved()
   {
