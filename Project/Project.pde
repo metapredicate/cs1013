@@ -19,7 +19,7 @@ PImage homeBG;
 
 public boolean dropped = false;
 public Screen homeScreen, townSelectScreen, countySelectScreen, regionSelectScreen, optionScreen, currentScreen, contactScreen, graphScreen;
-public Query currentQuery, top10Query, bot10Query, averageQuery;
+public Query currentQuery, defaultQuery, top10Query, bot10Query, averageQuery, statQuery;
 public String search, type;
 
 
@@ -29,7 +29,7 @@ void settings()
 }
 void setup() 
 { 
-  db = new SQLite( this, "landdata.db" );  
+  db = new SQLite( this, "landdata.db" );   //<>//
   c = new GUIController(this);
   backList = new ArrayList();
   color toolbarColor = color(150, 150, 150); 
@@ -40,8 +40,8 @@ void setup()
   homeBG.resize(SCREENX, SCREENY);
   //createGraphScreen();
 
-  String search = "CARDIFF";
-  String type = "Town";
+  search = "MIDDLESBROUGH";
+  type = "Town";
 
 
   homeScreen = new Screen(homeBG);
@@ -54,8 +54,8 @@ void setup()
   //if(currentScreen == townSelectScreen)
   //{ 
   //}
-  Query top10Query = new Query("CARDIFF", "Town", db);
-  currentQuery = top10Query;
+  this.defaultQuery = new Query(search, type, db);
+  currentQuery = defaultQuery;
 
 
   // HOME SCREEN
@@ -93,8 +93,12 @@ void draw()
 {
   currentScreen.draw();
   toolbar.draw();
+  
   if (testing!=null)
     testing.draw();
+    
+  if(currentScreen == townSelectScreen)
+    currentQuery.draw();
     
 }
 
@@ -108,10 +112,13 @@ void mousePressed()
   case EVENT_TOWN_BUTTON:
     currentScreen = townSelectScreen;
     backList.add(currentScreen);
+    type = "Town";
+    currentQuery.displayTop(10);
     break;
   case EVENT_COUNTY_BUTTON:
     currentScreen = countySelectScreen;
     backList.add(currentScreen);
+    type = "County";
     break;
   case EVENT_REGION_BUTTON:
     currentScreen = regionSelectScreen;
@@ -120,14 +127,40 @@ void mousePressed()
   case EVENT_UK_BUTTON:
     currentScreen = optionScreen;
     backList.add(currentScreen);
+    type = "All";
     break;
   case EVENT_AVG_BUTTON:
-    if (averageQuery == null)
+    if(averageQuery == null)
     {
-      Query averageQuery = new Query(search, type, db);
+      this.averageQuery = new Query(search, type, db);
     }
     currentQuery = averageQuery;
     currentQuery.displayAverageOverTime();
+    break;
+  case EVENT_TOP10_BUTTON:
+    if(top10Query == null)
+    {
+      this.top10Query = new Query(search, type, db);
+    }
+    currentQuery = top10Query;
+    currentQuery.displayTop(10);
+    break;
+  case EVENT_BOT10_BUTTON:
+    if(bot10Query == null)
+    {
+      this.bot10Query = new Query(search, type, db);
+    }
+    currentQuery = bot10Query;
+    currentQuery.displayBottom(10);
+    break;
+  case EVENT_STAT_BUTTON:
+    if(statQuery == null)
+    {
+      this.statQuery = new Query(search, type, db);
+    }
+    currentQuery = statQuery;
+    currentQuery.displayStats();
+    break;
   }
   switch(toolbar.getEvent())
   {
@@ -141,6 +174,7 @@ void mousePressed()
   case EVENT_HOME_BUTTON:
     currentScreen = homeScreen;
     backList.add(currentScreen);
+    currentQuery = defaultQuery;
     break;
   }
 }

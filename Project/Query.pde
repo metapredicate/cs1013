@@ -3,6 +3,7 @@ class Query
 {
   String search;
   String type;
+  String text;
   SQLite db;
   BarChart chart;
   Query(String search, String type, SQLite data)
@@ -29,8 +30,13 @@ class Query
     }
   }
   void draw() {
-    if (chart!=null) {
+    if (chart!=null) 
+    {
       chart.draw();
+    }
+    if (text != null)
+    {
+      text(text, SCREENX / 2, SCREENY / 4); 
     }
   }
 
@@ -77,7 +83,10 @@ class Query
     float range = getRange();
     float[] stats = {min, max, range, average};
     float[] xAxix = {1, 2, 3, 4};
-    chart = new BarChart(200, 200, 600, 360, xAxix, stats);
+    //chart = new BarChart(200, 200, 600, 360, xAxix, stats);
+    String text = "" + search + "\nAverage Price (All Time): " + average
+      + "\nLowest Priced Transaction: " + min + "\nHighest Priced Transaction: " + max 
+      + "\nPrice Range: " + range;
   }
   float getAverage() {
     int average=0;
