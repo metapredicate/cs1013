@@ -21,6 +21,9 @@ public color RASPBERRY_RED      = color(227, 11, 92);
 public color LIBERTY_BLUE       = color(84, 90, 167);
 public color MALACHITE          = color(11, 218, 81);
 
+//MAP
+public color OCEAN_BLUE      = color(202, 226, 245);
+
 
 //CONDITION COLOR - DO NOT USE THIS COLOR
 public color CONDITION          = color(1,1,1);

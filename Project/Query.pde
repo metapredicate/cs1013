@@ -4,6 +4,7 @@ class Query
   String search;
   String type;
   String text;
+  PropertyEntry entry;
   SQLite db;
   BarChart chart;
   Query(String search, String type, SQLite data)
@@ -40,7 +41,11 @@ class Query
       text(text, SCREENX / 2, SCREENY / 4); 
     }
   }
-
+  PropertyEntry getPropertyEntry(String input) {
+    
+    return entry;
+  }
+   
   void displayTop(int numberToReturn) {
     db.query( "SELECT * FROM registry WHERE "+type+" = "+search+" ORDER BY Price DESC LIMIT "+numberToReturn );
     float [] temp = new float[numberToReturn];
