@@ -10,7 +10,7 @@ class Query
   Query(String search, String type, SQLite data)
   {
     if (!type.equals("All")) {
-      search.toUpperCase();
+      search = search.toUpperCase();
       this.search = "'"+search+"'";
       this.type = type;
     }
@@ -42,6 +42,7 @@ class Query
     }
   }
   PropertyEntry getPropertyEntry(String input) {
+    String [] tempArray = input.split(" ");
     
     return entry;
   }
