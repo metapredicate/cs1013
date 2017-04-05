@@ -29,7 +29,7 @@ void settings()
 void setup() 
 { 
   db = new SQLite( this, "landdata.db" );   //<>//
-  c = new GUIController(this); //<>//
+  c = new GUIController(this); //<>// //<>//
   backList = new ArrayList();
   color toolbarColor = color(150, 150, 150); 
   myFont = loadFont("Serif.plain-15.vlw");
@@ -98,6 +98,7 @@ void draw()
     
   if(currentScreen == townSelectScreen)
     currentQuery.draw();
+
     
 }
 
@@ -129,35 +130,15 @@ void mousePressed()
     type = "All";
     break;
   case EVENT_AVG_BUTTON:
-    if(averageQuery == null)
-    {
-      this.averageQuery = new Query(search, type, db);
-    }
-    currentQuery = averageQuery;
     currentQuery.displayAverageOverTime();
     break;
   case EVENT_TOP10_BUTTON:
-    if(top10Query == null)
-    {
-      this.top10Query = new Query(search, type, db);
-    }
-    currentQuery = top10Query;
     currentQuery.displayTop(10);
     break;
   case EVENT_BOT10_BUTTON:
-    if(bot10Query == null)
-    {
-      this.bot10Query = new Query(search, type, db);
-    }
-    currentQuery = bot10Query;
     currentQuery.displayBottom(10);
     break;
   case EVENT_STAT_BUTTON:
-    if(statQuery == null)
-    {
-      this.statQuery = new Query(search, type, db);
-    }
-    currentQuery = statQuery;
     currentQuery.displayStats();
     break;
   }

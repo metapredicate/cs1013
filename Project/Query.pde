@@ -19,7 +19,7 @@ class Query
       this.type = "1";
       println(000);
     }
-
+    
     this.db=data;
 
     if (db.connect())

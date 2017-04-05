@@ -2,13 +2,12 @@ class Screen
 {
   private String graphLabel;
   private int labelX, labelY;
-  private ArrayList widgetList, barChartList;
+  private ArrayList widgetList;
   color backgroundColor = CONDITION;
   PImage backgroundImage;
   Boolean imageUsed = false;
   IFTextField t;
   IFLabel l;
-  Query currentQuery;
   Map myMap;
   
   Screen(color backgroundColor)
@@ -16,7 +15,6 @@ class Screen
     this.backgroundColor = backgroundColor;
 
     widgetList = new ArrayList();
-    barChartList = new ArrayList();
     graphLabel = "";
     labelX = 0;
     labelY = 0;
@@ -27,7 +25,6 @@ class Screen
     this.imageUsed = true;
     this.backgroundImage = backgroundImage;
     widgetList = new ArrayList();
-    barChartList = new ArrayList();
     graphLabel = "";
     labelX = 0;
     labelY = 0;
@@ -35,7 +32,6 @@ class Screen
   Screen(PApplet thisApplet) {
     myMap = new Map(thisApplet);
     widgetList = new ArrayList();
-    barChartList = new ArrayList();
     graphLabel = "";
     labelX = 0;
     labelY = 0;
@@ -51,21 +47,13 @@ class Screen
     {
       background(backgroundColor);
     }
-    if(currentQuery != null)
-    {
-      currentQuery.draw(); 
-    }
+
     for (int i =0; (i < widgetList.size()); i++)
     {
       Widget aWidget = (Widget) widgetList.get(i);
       aWidget.draw();
     }
 
-    for (int i = 0; (i < barChartList.size()); i++)
-    {
-      BarChart aBarChart = (BarChart) barChartList.get(i);
-      //aBarChart.draw(SCREENX / 2 - 360, SCREENY / 2 - 240, 720, 480);
-    }
     if(myMap!=null){
       myMap.draw();
     }
@@ -93,10 +81,6 @@ class Screen
     widgetList.add(new Widget(x, y, width, height, label, widgetColor, widgetFont, event));
   }
 
-  void addBarChart(BarChart barChart)
-  {
-    barChartList.add(barChart);
-  }
 
   void addText(int x, int y, String title)
   {
