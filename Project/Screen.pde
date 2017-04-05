@@ -11,7 +11,7 @@ class Screen
   IFTextField t;
   IFLabel l;
   Query currentQuery;
-  //Map myMap;
+  Map myMap;
   
   Screen(color backgroundColor)
   {
@@ -45,7 +45,7 @@ class Screen
     labelY = 0;
   }
   Screen(PApplet thisApplet) {
-    //myMap = new Map(thisApplet);
+    myMap = new Map(thisApplet);
     widgetList = new ArrayList();
     barChartList = new ArrayList();
     graphLabel = "";
@@ -78,13 +78,13 @@ class Screen
       BarChart aBarChart = (BarChart) barChartList.get(i);
       //aBarChart.draw(SCREENX / 2 - 360, SCREENY / 2 - 240, 720, 480);
     }
-    //if(myMap!=null){
-    //  myMap.draw();
-   
+    if(myMap!=null){
+      myMap.draw();
+    }
     fill(0);
     text(graphLabel, labelX, labelY);
   }
-
+  
   int getEvent()
   {
     int event;
@@ -145,7 +145,8 @@ class Screen
     }
   }
   void mousePressed() {
-    //if(myMap!=null){
-    //  myMap.mousePressed();
+    if(myMap!=null){
+      myMap.mousePressed();
     }
   }
+}
