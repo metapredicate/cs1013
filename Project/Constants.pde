@@ -1,7 +1,8 @@
-final int SCREENX = 1024;
-final int SCREENY = 768;
+final int SCREENX = 1152;
+final int SCREENY = 648;
 final int NUMBER_OF_ENTRIES = 1000;
-
+final int HOME_WIDGET_DROP = 100;
+final int QUERY_WIDGET_DROP = 200;
 final int EVENT_NULL = -1;
 
 //This duplicate should not effect the functionality of any class. It is soley used in the Bar class

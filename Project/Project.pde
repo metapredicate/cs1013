@@ -22,10 +22,10 @@ PropertyEntry[] propertyArray;
 SQLite db;
 BarChart barChart;
 Toolbar toolbar;
-PImage homeBG, countyBG, townBG;
+PImage homeBG, countyBG, townBG, aboutUsBG;
 
 public boolean dropped = false;
-public Screen homeScreen, townQueryScreen, townSelectScreen, countySelectScreen, regionSelectScreen, optionScreen, currentScreen, contactScreen, graphScreen;
+public Screen homeScreen, townQueryScreen, townSelectScreen, countySelectScreen, regionSelectScreen, optionScreen, currentScreen, contactScreen, graphScreen, aboutUsScreen;
 public Query currentQuery, defaultQuery, top10Query, bot10Query, averageQuery, statQuery;
 public String search, type;
 
@@ -63,6 +63,8 @@ void setup()
   townBG.resize(SCREENX, SCREENY);
   countyBG = loadImage("UnionFlag.png");
   countyBG.resize(SCREENX, SCREENY);
+  aboutUsBG = loadImage("AboutUs.png");
+  aboutUsBG.resize(SCREENX,SCREENY);
   gstq = minim.loadFile("gstq.mp3", 2048);
   search = "MIDDLESBROUGH";
   type = "Town";
@@ -75,24 +77,24 @@ void setup()
   regionSelectScreen = new Screen(RASPBERRY_RED);
   optionScreen = new Screen(BABY_BLUE);
   townQueryScreen = new Screen(PIGGY_PINK);
-
+  aboutUsScreen = new Screen(aboutUsBG);
   this.defaultQuery = new Query(search, type, db);
   currentQuery = defaultQuery;
 
 
   // HOME SCREEN
-
-  homeScreen.addWidget(0, SCREENY / 2 - 200, SCREENX/4, 62, 
+  // let home widget drop = 200;
+  homeScreen.addWidget(0, SCREENY / 2 - HOME_WIDGET_DROP, SCREENX/4, 62, 
   "Town", WOOD_BROWN, myFont, EVENT_TOWN_BUTTON);
-  homeScreen.addWidget(SCREENX / 4, SCREENY / 2 - 200, SCREENX/4, 62, "County", SHAMROCK_GREEN, myFont, EVENT_COUNTY_BUTTON);
-  homeScreen.addWidget(SCREENX/2, SCREENY / 2 - 200, SCREENX/4, 62, "Region", AMERICAN_RED, myFont, EVENT_REGION_BUTTON);
-  homeScreen.addWidget(SCREENX-SCREENX/4, SCREENY / 2 - 200, SCREENX/4, 62, "Whole U.K.", UNION_JACK_BLUE, myFont, EVENT_UK_BUTTON); 
+  homeScreen.addWidget(SCREENX / 4, SCREENY / 2 - HOME_WIDGET_DROP, SCREENX/4, 62, "County", SHAMROCK_GREEN, myFont, EVENT_COUNTY_BUTTON);
+  homeScreen.addWidget(SCREENX/2, SCREENY / 2 - HOME_WIDGET_DROP, SCREENX/4, 62, "Region", AMERICAN_RED, myFont, EVENT_REGION_BUTTON);
+  homeScreen.addWidget(SCREENX-SCREENX/4, SCREENY / 2 - HOME_WIDGET_DROP, SCREENX/4, 62, "Whole U.K.", UNION_JACK_BLUE, myFont, EVENT_UK_BUTTON); 
 
   // TOWN SELECT SCREEN
-  townQueryScreen.addWidget(0, SCREENY / 2 - 300, SCREENX/4, 62, "Highest Priced", WOOD_BROWN, myFont, EVENT_TOP10_BUTTON);
-  townQueryScreen.addWidget(SCREENX / 4, SCREENY / 2 - 300, SCREENX/4, 62, "Lowest Priced", WOOD_BROWN, myFont, EVENT_BOT10_BUTTON);
-  townQueryScreen.addWidget(SCREENX / 2, SCREENY / 2 - 300, SCREENX/4, 62, "Average Prices Over Time", AMERICAN_RED, myFont, EVENT_AVG_BUTTON);
-  townQueryScreen.addWidget(SCREENX * 3 / 4, SCREENY / 2 - 300, SCREENX/4, 62, "Area Statistics", AMERICAN_RED, myFont, EVENT_STAT_BUTTON);
+  townQueryScreen.addWidget(0, SCREENY / 2 - QUERY_WIDGET_DROP, SCREENX/4, 62, "Highest Priced", WOOD_BROWN, myFont, EVENT_TOP10_BUTTON);
+  townQueryScreen.addWidget(SCREENX / 4, SCREENY / 2 - QUERY_WIDGET_DROP, SCREENX/4, 62, "Lowest Priced", WOOD_BROWN, myFont, EVENT_BOT10_BUTTON);
+  townQueryScreen.addWidget(SCREENX / 2, SCREENY / 2 - QUERY_WIDGET_DROP, SCREENX/4, 62, "Average Prices Over Time", AMERICAN_RED, myFont, EVENT_AVG_BUTTON);
+  townQueryScreen.addWidget(SCREENX * 3 / 4, SCREENY / 2 - QUERY_WIDGET_DROP, SCREENX/4, 62, "Area Statistics", AMERICAN_RED, myFont, EVENT_STAT_BUTTON);
   //}
 
   currentScreen = homeScreen;
@@ -182,6 +184,10 @@ void mousePressed()
     currentScreen = homeScreen;
     backList.add(currentScreen);
     currentQuery = defaultQuery;
+    break;
+  case EVENT_QUERY1:
+    currentScreen = aboutUsScreen;
+    backList.add(currentScreen);
     break;
   case EVENT_QUERY3:
     gstq.play();
