@@ -203,6 +203,11 @@ void mousePressed()
     {
       backList.remove(currentScreen);
       currentScreen = (Screen) backList.get(backList.size() - 1);
+      if ( currentScreen == townSelectScreen)
+      {
+        townSelectScreen.showSearchBar();
+        searchbarIsDisplayed = true;
+      }
     }
     break;
   case EVENT_HOME_BUTTON:

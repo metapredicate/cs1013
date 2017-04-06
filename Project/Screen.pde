@@ -114,7 +114,7 @@ class Screen
     IFTextField searchbar = new IFTextField("Search", x, y);
     //IFLabel label = new IFLabel( "Search", x+barWidth/2 -15, y-15);
     searchbar.setSize(barWidth, barHeight);
-    this.addWidget(SCREENX/4, SCREENY/2, 40, 40, "search", SHAMROCK_GREEN, baskerville, EVENT_SEARCH);
+    this.addWidget(SCREENX/4, SCREENY/2, 80, 40, "search", SHAMROCK_GREEN, baskerville, EVENT_SEARCH);
     this.searchbar = searchbar;
     //this.label = label;
     gui.add(this.searchbar);
