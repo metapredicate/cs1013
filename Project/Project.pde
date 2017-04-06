@@ -28,8 +28,8 @@ public boolean dropped = false;
 public Screen homeScreen, townQueryScreen, townSelectScreen, countySelectScreen, regionSelectScreen, optionScreen, currentScreen, contactScreen, graphScreen, aboutUsScreen;
 public Query currentQuery, defaultQuery, top10Query, bot10Query, averageQuery, statQuery;
 public String search, type;
- //<>//
- //<>//
+ //<>// //<>//
+ //<>// //<>//
 
 // CAUTION WITH GLOBAL VARIABLE: IS ONLY WAY POSSIBLE TO HAVE SEARCHBAR APPEAR AND DISAPPEAR
 public boolean searchbarIsDisplayed = false;
@@ -41,9 +41,9 @@ void settings()
 }
 
 void loadingScreen()
-{ //<>// //<>//
- background(0); //<>// //<>//
- textSize(50); //<>//
+{ //<>// //<>// //<>//
+ background(0); //<>// //<>// //<>//
+ textSize(50); //<>// //<>//
  text("loading...", 10, SCREENY - 30);
 }
 
@@ -198,6 +198,9 @@ void mousePressed()
   case EVENT_QUERY1:
     currentScreen = aboutUsScreen;
     backList.add(currentScreen);
+    break;
+  case EVENT_QUERY2:
+    link("https://subversion.scss.tcd.ie/cs1013-1617-26/");
     break;
   case EVENT_QUERY3:
     gstq.play();
