@@ -52,7 +52,7 @@ class PieChart
 
   void draw()
   {
-    //noStroke();
+    stroke(0);
     float lastAngle = 0;
     for (int i = 0; i < data.length; i++) 
     {

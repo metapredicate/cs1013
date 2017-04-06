@@ -23,11 +23,11 @@ class Bar extends Widget
   void mouseMoved()
   {
     if (super.getEvent(mouseX, mouseY) == BAR_EVENT)
-    {
+    { 
       fill(0);
       textSize(20);
       text("" + ((type.equals("BarChart"))? "£" : "") + barValue, x, yForText);
-      text("" + ((xValueDisplayed)? xValue : ""), x, yForText + 20);
+      text("" + ((xValueDisplayed)? xValue : ""), x + 26, yForText + 22);
     }
   }
 }

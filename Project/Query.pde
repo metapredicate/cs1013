@@ -173,7 +173,7 @@ class Query
         temp[i] = parseFloat(db.getInt("Price"));
       }
     }
-    chart = new BarChart(200, 200, 600, 360, temp);
+    chart = new BarChart(200, 200, 600, 360, temp, "Top 10 Prices");
   }
   void displayBottom(int numberToReturn) {
     db.query( "SELECT * FROM registry WHERE "+type+" = "+search+" ORDER BY Price ASC LIMIT "+numberToReturn );
@@ -184,7 +184,7 @@ class Query
         temp[i] = parseFloat(db.getInt("Price"));
       }
     }
-    chart = new BarChart(200, 200, 600, 360, temp);
+    chart = new BarChart(200, 200, 600, 360, temp, "Bottom 10 Prices");
   }
   void displayAverageOverTime() {
     float[] average = new float[20];
@@ -201,7 +201,7 @@ class Query
       int year = 1995 + i;
       xAxis[i] = ("" + year);
     }
-    chart = new BarChart(200, 200, 600, 360, xAxis, average, true);
+    chart = new BarChart(200, 200, 600, 360, xAxis, average, true, "Average Over Time (1994-2014)");
   }
   void displayStats() {
     float average = getAverage();
@@ -209,8 +209,6 @@ class Query
     float max = getMax();
     float range = getRange();
     float[] stats = {min, max, range, average};
-    float[] xAxix = {1, 2, 3, 4};
-    //chart = new BarChart(200, 200, 600, 360, xAxix, stats);
     String text = "" + search + "\nAverage Price (All Time): " + average
       + "\nLowest Priced Transaction: " + min + "\nHighest Priced Transaction: " + max 
       + "\nPrice Range: " + range;

@@ -8,19 +8,10 @@ class BarChart
   private String[] xValues;
   private int[] barHeights;
   private boolean xAxisVisible;
+  private String label;
 
   private ArrayList barList;
 
-  BarChart(int x, int y, int width, int height, String[] xValues, float[] yValues)
-  { 
-    this(x, y, width, height, xValues, yValues, false);
-  }
-
-  BarChart(int x, int y, int width, int height, float[] yValues)
-  {
-    this(x, y, width, height, null, yValues);
-  }
-  
   BarChart(int x, int y, int width, int height, String[] xValues, float[] yValues, boolean xAxisVisible)
   {
     this.x = x;
@@ -42,6 +33,22 @@ class BarChart
 
     calculateBarHeights();
     createBars();
+  }
+  
+  BarChart(int x, int y, int width, int height, String[] xValues, float[] yValues, boolean xAxisVisible, String label)
+  {
+    this(x, y, width, height, xValues, yValues, xAxisVisible);
+    this.label = label;
+  }
+
+  BarChart(int x, int y, int width, int height, float[] yValues)
+  {
+    this(x, y, width, height, null, yValues, false);
+  }
+  
+    BarChart(int x, int y, int width, int height, float[] yValues, String label)
+  {
+    this(x, y, width, height, null, yValues, false, label);
   }
   
   void calculateBarHeights()
@@ -91,13 +98,8 @@ class BarChart
 
   void draw()
   {
-    for (int i = 0; (i < barList.size()); i++)
-    {
-      Bar tmpBar = (Bar) barList.get(i);
-      tmpBar.draw();
-      tmpBar.mouseMoved();
-    }
     fill(0);
+    stroke(0);
     line(x, y, x, y + height);
     line(x, y + height, x + width, y + height);
     
@@ -109,6 +111,23 @@ class BarChart
       line(x, lineY, x - 6, lineY);
       float value = maxY - (quarterValue * quarter); 
       text("£" + value, x - 88, lineY);
+    }
+    
+    if(label != null)
+    {
+      fill(0);
+      textSize(20);
+      if(xAxisVisible)
+        text(label, x + (width / 2) - 170, y + height + 65);
+      else
+        text(label, x + (width / 2) - 90, y + height + 40);
+    }
+    
+    for (int i = 0; (i < barList.size()); i++)
+    {
+      Bar tmpBar = (Bar) barList.get(i);
+      tmpBar.draw();
+      tmpBar.mouseMoved();
     }
   }
 }
