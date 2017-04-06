@@ -33,7 +33,7 @@ public String search, type;
 // CAUTION WITH GLOBAL VARIABLE: IS ONLY WAY POSSIBLE TO HAVE SEARCHBAR APPEAR AND DISAPPEAR
 public boolean searchbarIsDisplayed = false;
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
+public boolean districtSBisDisplayed = false;
 void settings() 
 {
   size(SCREENX, SCREENY);
@@ -73,7 +73,7 @@ void setup()
   contactScreen = new Screen(PROCESS_YELLOW);
   townSelectScreen = new Screen(townBG);
   countySelectScreen = new Screen(this, countyBG);
-  regionSelectScreen = new Screen(RASPBERRY_RED);
+  regionSelectScreen = new Screen(townBG);
   optionScreen = new Screen(BABY_BLUE);
   townQueryScreen = new Screen(PIGGY_PINK);
   aboutUsScreen = new Screen(aboutUsBG);
@@ -86,7 +86,7 @@ void setup()
   homeScreen.addWidget(0, SCREENY / 2 - HOME_WIDGET_DROP, SCREENX/4, 62, 
     "Town", WOOD_BROWN, myFont, EVENT_TOWN_BUTTON);
   homeScreen.addWidget(SCREENX / 4, SCREENY / 2 - HOME_WIDGET_DROP, SCREENX/4, 62, "County", SHAMROCK_GREEN, myFont, EVENT_COUNTY_BUTTON);
-  homeScreen.addWidget(SCREENX/2, SCREENY / 2 - HOME_WIDGET_DROP, SCREENX/4, 62, "Region", AMERICAN_RED, myFont, EVENT_REGION_BUTTON);
+  homeScreen.addWidget(SCREENX/2, SCREENY / 2 - HOME_WIDGET_DROP, SCREENX/4, 62, "District", AMERICAN_RED, myFont, EVENT_REGION_BUTTON);
   homeScreen.addWidget(SCREENX-SCREENX/4, SCREENY / 2 - HOME_WIDGET_DROP, SCREENX/4, 62, "Whole U.K.", UNION_JACK_BLUE, myFont, EVENT_UK_BUTTON); 
 
   // TOWN SELECT SCREEN
@@ -116,6 +116,11 @@ void draw()
      searchbarIsDisplayed = false;
      townSelectScreen.hideSearchBar();
    }
+   if( (currentScreen != regionSelectScreen) && districtSBisDisplayed )
+   {
+     districtSBisDisplayed = false;
+     regionSelectScreen.hideSearchBar();
+   }
   if (currentScreen == townQueryScreen)
   {
     currentQuery.draw();
@@ -126,7 +131,7 @@ void draw()
       text("Viewing Results for the UK", 10, 60);
     } else
     {
-      text("Viewing results for " + search + " " + type, 10, 60); 
+      text("Viewing results for " + search + " " , 10, 60); 
     }
   }
 }
@@ -157,7 +162,11 @@ void mousePressed()
     }
     else if ( currentScreen == regionSelectScreen )
     {
-      String output = townSelectScreen.searchbar.getValue();
+      String output = regionSelectScreen.searchbar.getValue();
+      currentScreen = townQueryScreen;
+       type = "District";
+      search = output;
+      currentQuery = new Query(search, type);
       currentScreen = townQueryScreen;
     }
     else
@@ -175,6 +184,8 @@ void mousePressed()
   case EVENT_REGION_BUTTON:
     currentScreen = regionSelectScreen;
     backList.add(currentScreen);
+    regionSelectScreen.showSearchBar();
+    districtSBisDisplayed = true;
     break;
   case EVENT_UK_BUTTON:
     backList.add(currentScreen);
@@ -211,6 +222,16 @@ void mousePressed()
     }
     break;
   case EVENT_HOME_BUTTON:
+    if (currentScreen == townSelectScreen)
+    {
+      searchbarIsDisplayed = false;
+      townSelectScreen.hideSearchBar();
+    }
+    if ( currentScreen == regionSelectScreen)
+    {
+      districtSBisDisplayed = false;
+      regionSelectScreen.hideSearchBar();
+    }
     currentScreen = homeScreen;
     backList.add(currentScreen);
     currentQuery = defaultQuery;
