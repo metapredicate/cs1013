@@ -45,7 +45,7 @@ class PieChart
       {
         float percentage =  ((angles[i] / 360) * 100);
         percentage = (((float) (Math.round(percentage * 100))) / 100);
-        key[i] = (percentage + "% " + key[i]);
+        key[i] = (key[i] + ": " + percentage + "%");
       }
     }
   }
@@ -62,15 +62,17 @@ class PieChart
       fill(color(r, g, b));
       arc(x, y, radius * 2, radius * 2, lastAngle, lastAngle + radians(angles[i]));
       lastAngle += radians(angles[i]);
-    }
-    
-    if(key != null)
-    {
-      for(int i = 0;(i < key.length);i++)
+      
+      if(key != null)
       {
         fill(0);
         textSize(20);
-        text(key[i], x + radius + 30, y - (radius - 50) + (i * 30));
+        int textX = x + radius + 60;
+        int textY =  y - (radius - 50)+ (i * 30);
+        text(key[i], textX, textY);
+        
+        fill(color(r,g,b));
+        rect(textX - 35, textY - 20, 20, 20);
       }
     }
   }
