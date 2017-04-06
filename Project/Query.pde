@@ -39,18 +39,9 @@ class Query
     {
       chart.draw();
     }
-    if (text != null)
-    {
-      text(text, SCREENX / 2, SCREENY / 4);
-    }
     if (pChart!=null)
     {
       pChart.draw();
-    }
-    if (pieChartWords!= null)
-    {
-      println(pieChartWords);
-      text(pieChartWords, 620, 400);
     } 
   }
   PropertyEntry getPropertyEntry() {
@@ -168,16 +159,8 @@ class Query
         data[4]++;
       }
     }
-    pChart = new PieChart(400, 400, 200, data);
-    float[] angles = pChart.getAngles();
-    float[] percentages = angles.clone();
-    for(int i = 0; i < angles.length; i++)
-    {
-      percentages[i] = (int)(Math.round((angles[i] / 360) * 100));
-      println(percentages[i]);
-    }
-    String pieChartWords = ("" + percentages[0] + "% Semi-Detached\n"+ percentages[1] + "% Detached\n" + percentages[2] 
-            + "% Terraced\n" + percentages[3] + "% Flats\n" + percentages[4] + "% Other\n");
+    String[] key = {"Detached", "Semi-Detached", "Terraced", "Flats", "Other"};
+    pChart = new PieChart(400, 400, 200, data, key);
   }
 
   

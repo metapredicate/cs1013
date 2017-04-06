@@ -2,15 +2,24 @@ class PieChart
 {
   private int x, y, radius;
   private float[] data, angles;
+  private String[] key;
 
   PieChart(int x, int y, int radius, float[] data)
+  {
+    this(x, y, radius, data, null);
+  }
+  
+  PieChart(int x, int y, int radius, float[] data, String[] key)
   {
     this.x = x;
     this.y = y;
     this.radius = radius;  
     this.data = data;
+    this.key = key;
 
     calculateAngles();
+    if(key != null)
+      calculateKey();
   }
 
   void calculateAngles()
@@ -27,10 +36,23 @@ class PieChart
       angles[i] = ((data[i] * 360) / total);
     }
   }
+  
+  void calculateKey()
+  {
+    if(key.length == angles.length)
+    {
+      for(int i = 0;(i < key.length);i++)
+      {
+        float percentage =  ((angles[i] / 360) * 100);
+        percentage = (((float) (Math.round(percentage * 100))) / 100);
+        key[i] = (percentage + "% " + key[i]);
+      }
+    }
+  }
 
   void draw()
   {
-    noStroke();
+    //noStroke();
     float lastAngle = 0;
     for (int i = 0; i < data.length; i++) 
     {
@@ -41,9 +63,15 @@ class PieChart
       arc(x, y, radius * 2, radius * 2, lastAngle, lastAngle + radians(angles[i]));
       lastAngle += radians(angles[i]);
     }
-  }
-  float[] getAngles()
-  {
-    return angles;
+    
+    if(key != null)
+    {
+      for(int i = 0;(i < key.length);i++)
+      {
+        fill(0);
+        textSize(20);
+        text(key[i], x + radius + 30, y - (radius - 50) + (i * 30));
+      }
+    }
   }
 }
