@@ -28,8 +28,8 @@ public boolean dropped = false;
 public Screen homeScreen, townQueryScreen, townSelectScreen, countySelectScreen, regionSelectScreen, optionScreen, currentScreen, contactScreen, graphScreen, aboutUsScreen;
 public Query currentQuery, defaultQuery, top10Query, bot10Query, averageQuery, statQuery;
 public String search, type;
-
-
+ //<>//
+ //<>//
 
 // CAUTION WITH GLOBAL VARIABLE: IS ONLY WAY POSSIBLE TO HAVE SEARCHBAR APPEAR AND DISAPPEAR
 public boolean searchbarIsDisplayed = false;
@@ -41,9 +41,9 @@ void settings()
 }
 
 void loadingScreen()
-{ //<>//
- background(0); //<>//
- textSize(50);
+{ //<>// //<>//
+ background(0); //<>// //<>//
+ textSize(50); //<>//
  text("loading...", 10, SCREENY - 30);
 }
 
@@ -177,6 +177,7 @@ void mousePressed()
     currentQuery.displayBottom(10);
     break;
   case EVENT_STAT_BUTTON:
+    currentQuery.setChartToNull();
     currentQuery.displayHouseType();
     break;
   }

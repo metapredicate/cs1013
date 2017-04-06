@@ -39,7 +39,7 @@ class Query
     {
       chart.draw();
     }
-    if (pChart!=null)
+    else if (pChart!=null)
     {
       pChart.draw();
     } 
@@ -108,7 +108,7 @@ class Query
         println(priceRange[i] );
       }
     }
-    histogramQuery = new Histogram(200, 200, 600, 360, priceRange, increment);
+   // histogramQuery = new Histogram(200, 200, 600, 360, priceRange, increment);
   }
 
   void displayAge() {
@@ -250,5 +250,10 @@ class Query
       return false;
     }
     return true;
+  }
+  
+  void setChartToNull()
+  {
+   chart = null; 
   }
 }
