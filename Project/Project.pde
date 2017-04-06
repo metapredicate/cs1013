@@ -28,8 +28,8 @@ public boolean dropped = false;
 public Screen homeScreen, townQueryScreen, townSelectScreen, countySelectScreen, regionSelectScreen, optionScreen, currentScreen, contactScreen, graphScreen, aboutUsScreen;
 public Query currentQuery, defaultQuery, top10Query, bot10Query, averageQuery, statQuery;
 public String search, type;
-
-
+ //<>//
+ //<>//
 
 // CAUTION WITH GLOBAL VARIABLE: IS ONLY WAY POSSIBLE TO HAVE SEARCHBAR APPEAR AND DISAPPEAR
 public boolean searchbarIsDisplayed = false;
@@ -42,8 +42,8 @@ void settings()
 
 void loadingScreen()
 { //<>//
- background(0); //<>//
- textSize(50);
+ background(0); //<>// //<>//
+ textSize(50); //<>//
  text("loading...", 10, SCREENY - 30);
 }
 
@@ -63,8 +63,8 @@ void setup()
   townBG.resize(SCREENX, SCREENY);
   countyBG = loadImage("UnionFlag.png");
   countyBG.resize(SCREENX, SCREENY);
-  aboutUsBG = loadImage("AboutUs.png");
-  aboutUsBG.resize(SCREENX,SCREENY);
+  //aboutUsBG = loadImage("AboutUs.png");
+ // aboutUsBG.resize(SCREENX,SCREENY);
   gstq = minim.loadFile("gstq.mp3", 2048);
   search = "MIDDLESBROUGH";
   type = "Town";
@@ -78,7 +78,7 @@ void setup()
   optionScreen = new Screen(BABY_BLUE);
   townQueryScreen = new Screen(PIGGY_PINK);
   aboutUsScreen = new Screen(aboutUsBG);
-  this.defaultQuery = new Query(search, type, db);
+  this.defaultQuery = new Query(search, type);
   currentQuery = defaultQuery;
 
 
@@ -155,7 +155,7 @@ void mousePressed()
     currentScreen = optionScreen;
     backList.add(currentScreen);
     type = "All";
-    currentQuery = new Query(search, type, db);
+    currentQuery = new Query(search, type);
     currentScreen = townQueryScreen;
     break;
   case EVENT_AVG_BUTTON:

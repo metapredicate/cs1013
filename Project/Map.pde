@@ -23,17 +23,24 @@ class Map {
     {
       fill(180, 120, 120);
       geoMap.draw(id);
-
       String name = geoMap.getAttributeTable().findRow(str(id), 0).getString("NAME_2");    
       fill(0);
       text(name, mouseX+5, mouseY-5);
     }
+
   }
   void mousePressed() {
     int id = geoMap.getID(mouseX, mouseY);
     if ((id != -1)&&((id<113)||(id>170)))
     {
-      String name = geoMap.getAttributeTable().findRow(str(id), 0).getString("NAME_2");    
+      String isLondon = geoMap.getAttributeTable().findRow(str(id), 0).getString("TYPE_2");
+      String name;
+      if(isLondon.equals("London Borough")){
+        name = "GREATER LONDON";
+      }
+      else{ 
+        name = geoMap.getAttributeTable().findRow(str(id), 0).getString("NAME_2");  
+      }
       println(name);
       search = name;
       type = "County";
