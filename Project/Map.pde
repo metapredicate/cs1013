@@ -1,4 +1,3 @@
-
 class Map {
   GeoMap geoMap;
   Map(PApplet thisApplet)
@@ -45,7 +44,8 @@ class Map {
       search = name;
       type = "County";
       currentQuery = new Query(search, type);
-      currentScreen = townSelectScreen;
+      currentScreen = townQueryScreen;
     }
   }
+
 }

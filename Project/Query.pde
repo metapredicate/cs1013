@@ -3,7 +3,7 @@ class Query
 {
   String search;
   String type;
-  String text;
+  String text, pieChartWords;
   PropertyEntry entry;
   BarChart chart;
   PieChart pChart;
@@ -39,14 +39,16 @@ class Query
     {
       chart.draw();
     }
-    if (text != null)
-    {
-      text(text, SCREENX / 2, SCREENY / 4);
-    }
-    if(pChart!=null)
+    else if(pChart!=null)
     {
       pChart.draw();
     }
+    if (pieChartWords!= null)
+    {
+      println(pieChartWords);
+      text(pieChartWords, 620, 400);
+    }
+   
   }
   PropertyEntry getPropertyEntry() {
     String [] s = search.split("\\s*,\\s*");
@@ -152,7 +154,16 @@ class Query
         data[4]++;
       }
     }
-    pChart = new PieChart(400, 400, 200,data);
+    pChart = new PieChart(400, 400, 200, data);
+    float[] angles = pChart.getAngles();
+    float[] percentages = angles.clone();
+    for(int i = 0; i < angles.length; i++)
+    {
+      percentages[i] = (int)(Math.round((angles[i] / 360) * 100));
+      println(percentages[i]);
+    }
+    String pieChartWords = ("" + percentages[0] + "% Semi-Detached\n"+ percentages[1] + "% Detached\n" + percentages[2] 
+            + "% Terraced\n" + percentages[3] + "% Flats\n" + percentages[4] + "% Other\n");
   }
 
   
@@ -167,7 +178,8 @@ class Query
     }
     chart = new BarChart(200, 200, 600, 360, temp);
   }
-  void displayBottom(int numberToReturn) {
+  void displayBottom(int numberToReturn) 
+  {
     db.query( "SELECT * FROM registry WHERE "+type+" = "+search+" ORDER BY Price ASC LIMIT "+numberToReturn );
     float [] temp = new float[numberToReturn];
     for (int i=0; i<numberToReturn; i++)

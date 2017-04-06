@@ -42,4 +42,8 @@ class PieChart
       lastAngle += radians(angles[i]);
     }
   }
+  float[] getAngles()
+  {
+    return angles;
+  }
 }

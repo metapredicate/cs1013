@@ -1,4 +1,4 @@
-import interfascia.*;
+import interfascia.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 import org.gicentre.utils.stat.*;
 import de.bezier.data.sql.*;
 import org.gicentre.geomap.*;
@@ -28,8 +28,8 @@ public boolean dropped = false;
 public Screen homeScreen, townQueryScreen, townSelectScreen, countySelectScreen, regionSelectScreen, optionScreen, currentScreen, contactScreen, graphScreen, aboutUsScreen;
 public Query currentQuery, defaultQuery, top10Query, bot10Query, averageQuery, statQuery;
 public String search, type;
- //<>//
- //<>//
+
+
 
 // CAUTION WITH GLOBAL VARIABLE: IS ONLY WAY POSSIBLE TO HAVE SEARCHBAR APPEAR AND DISAPPEAR
 public boolean searchbarIsDisplayed = false;
@@ -42,15 +42,15 @@ void settings()
 
 void loadingScreen()
 { //<>//
- background(0); //<>// //<>//
- textSize(50); //<>//
+ background(0); //<>//
+ textSize(50);
  text("loading...", 10, SCREENY - 30);
 }
 
 void setup() 
 { 
-  minim = new Minim(this);
   loadingScreen();
+  minim = new Minim(this);
   db = new SQLite( this, "landdata.db" );  
   backList = new ArrayList();
   color toolbarColor = color(150, 150, 150); 
@@ -64,7 +64,7 @@ void setup()
   countyBG = loadImage("UnionFlag.png");
   countyBG.resize(SCREENX, SCREENY);
   //aboutUsBG = loadImage("AboutUs.png");
- // aboutUsBG.resize(SCREENX,SCREENY);
+  //aboutUsBG.resize(SCREENX,SCREENY);
   gstq = minim.loadFile("gstq.mp3", 2048);
   search = "MIDDLESBROUGH";
   type = "Town";
@@ -119,7 +119,14 @@ void draw()
     currentQuery.draw();
     textSize(24);
     fill(0);
-    text("Viewing results for " + search + " " + type, 10, 60);
+    if(type.equals("All"))
+    {
+       text("Viewing Results for the UK", 10, 60); 
+    }
+    else
+    {
+      text("Viewing results for " + search + " " + type, 10, 60); 
+    }
   }
 }
 
@@ -152,7 +159,6 @@ void mousePressed()
     backList.add(currentScreen);
     break;
   case EVENT_UK_BUTTON:
-    currentScreen = optionScreen;
     backList.add(currentScreen);
     type = "All";
     currentQuery = new Query(search, type);
@@ -168,7 +174,7 @@ void mousePressed()
     currentQuery.displayBottom(10);
     break;
   case EVENT_STAT_BUTTON:
-    currentQuery.displayStats();
+    currentQuery.displayHouseType();
     break;
   }
   switch(toolbar.getEvent())
