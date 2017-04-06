@@ -43,6 +43,9 @@ class Query
     {
       pChart.draw();
     } 
+    else if(entry!=null) {
+      entry.draw();
+    }
   }
   PropertyEntry getPropertyEntry() {
     String [] s = search.split("\\s*,\\s*");
@@ -52,19 +55,31 @@ class Query
     } else {
       db.query( "SELECT * FROM registry WHERE NumName = '" +s[0] +"' AND Street = '"+s[1]+"'");
     }
-    String [] temp = new String[11];
+    String[] temp = new String[11];
     if (db.next()) {
       temp[0] = ""+db.getInt("Price");
+      textSize(20);
+      text(temp[0], 30,30);
       temp[1] = db.getString("Date");
+      text(temp[1], 50,30);
       temp[2] = db.getString("Postcode");
+      text(temp[2], 70,30);
       temp[3] = db.getString("Type");
+      text(temp[3], 90,30);
       temp[4] = db.getString("OldNew");
+      text(temp[4], 110,30);
       temp[5] = db.getString("NumName");
+      text(temp[5], 130,30);
       temp[6] = db.getString("Street");
+      text(temp[6], 150,30);
       temp[7] = db.getString("Locality");
+      text(temp[7], 170,30);
       temp[8] = db.getString("Town");
+      text(temp[8], 190,30);
       temp[9] = db.getString("District");
+      text(temp[9], 210,30);
       temp[10] = db.getString("County");
+      text(temp[10], 230,30);
       entry = new PropertyEntry(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6], temp[7], temp[8], temp[9], temp[10]);
       String test = entry.toString();
       println(test);

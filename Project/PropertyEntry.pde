@@ -20,6 +20,9 @@ class PropertyEntry
     this.district = ((district == null)? "" : district);
     this.county = ((county == null)? "" : county);
   }
+  void draw(){
+    
+  }
 
   String getNumName()
   {

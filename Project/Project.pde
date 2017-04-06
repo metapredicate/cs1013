@@ -1,4 +1,4 @@
-import interfascia.*;
+import interfascia.*; //<>// //<>// //<>// //<>// //<>//
 import org.gicentre.utils.stat.*;
 import de.bezier.data.sql.*;
 import org.gicentre.geomap.*;
@@ -28,8 +28,7 @@ public boolean dropped = false;
 public Screen homeScreen, townQueryScreen, townSelectScreen, countySelectScreen, regionSelectScreen, optionScreen, currentScreen, contactScreen, graphScreen, aboutUsScreen;
 public Query currentQuery, defaultQuery, top10Query, bot10Query, averageQuery, statQuery;
 public String search, type;
- //<>// //<>//
- //<>// //<>//
+
 
 // CAUTION WITH GLOBAL VARIABLE: IS ONLY WAY POSSIBLE TO HAVE SEARCHBAR APPEAR AND DISAPPEAR
 public boolean searchbarIsDisplayed = false;
@@ -41,10 +40,10 @@ void settings()
 }
 
 void loadingScreen()
-{ //<>// //<>// //<>//
- background(0); //<>// //<>// //<>//
- textSize(50); //<>// //<>//
- text("loading...", 10, SCREENY - 30);
+{ //<>//
+  background(0); //<>//
+  textSize(50);
+  text("loading...", 10, SCREENY - 30);
 }
 
 void setup() 
@@ -64,7 +63,7 @@ void setup()
   countyBG = loadImage("UnionFlag.png");
   countyBG.resize(SCREENX, SCREENY);
   aboutUsBG = loadImage("AboutUs.png");
-  aboutUsBG.resize(SCREENX,SCREENY);
+  aboutUsBG.resize(SCREENX, SCREENY);
   gstq = minim.loadFile("gstq.mp3", 2048);
   search = "MIDDLESBROUGH";
   type = "Town";
@@ -85,7 +84,7 @@ void setup()
   // HOME SCREEN
   // let home widget drop = 200;
   homeScreen.addWidget(0, SCREENY / 2 - HOME_WIDGET_DROP, SCREENX/4, 62, 
-  "Town", WOOD_BROWN, myFont, EVENT_TOWN_BUTTON);
+    "Town", WOOD_BROWN, myFont, EVENT_TOWN_BUTTON);
   homeScreen.addWidget(SCREENX / 4, SCREENY / 2 - HOME_WIDGET_DROP, SCREENX/4, 62, "County", SHAMROCK_GREEN, myFont, EVENT_COUNTY_BUTTON);
   homeScreen.addWidget(SCREENX/2, SCREENY / 2 - HOME_WIDGET_DROP, SCREENX/4, 62, "Region", AMERICAN_RED, myFont, EVENT_REGION_BUTTON);
   homeScreen.addWidget(SCREENX-SCREENX/4, SCREENY / 2 - HOME_WIDGET_DROP, SCREENX/4, 62, "Whole U.K.", UNION_JACK_BLUE, myFont, EVENT_UK_BUTTON); 
@@ -99,9 +98,9 @@ void setup()
 
   currentScreen = homeScreen;
   backList.add(currentScreen);
-  
-  Query test = new Query("CARDIFF","County");
-  test.displayPriceRange();
+
+  Query test = new Query("94 , clough close");
+  test.getPropertyEntry();
 }
 
 //
@@ -124,9 +123,8 @@ void draw()
     fill(0);
     if(type.equals("All"))
     {
-       text("Viewing Results for the UK", 10, 60); 
-    }
-    else
+      text("Viewing Results for the UK", 10, 60);
+    } else
     {
       text("Viewing results for " + search + " " + type, 10, 60); 
     }
@@ -146,7 +144,24 @@ void mousePressed()
     searchbarIsDisplayed = true;
     backList.add(currentScreen);
     break;
-  case EVENT_APRES_TOWN_BUTTON:
+  case EVENT_SEARCH:
+  
+    if ( currentScreen == townSelectScreen )
+    {
+      String output = townSelectScreen.searchbar.getValue();
+      type = "Town";
+      search = output;
+      currentQuery = new Query(search, type);
+      currentScreen = townQueryScreen;
+      
+    }
+    else if ( currentScreen == regionSelectScreen )
+    {
+      String output = townSelectScreen.searchbar.getValue();
+      currentScreen = townQueryScreen;
+    }
+    else
+  
     currentScreen = townQueryScreen;
     backList.add(currentScreen);
     type = "Town";
