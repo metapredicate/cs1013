@@ -2,7 +2,7 @@ class Map {
   GeoMap geoMap;
   Map(PApplet thisApplet)
   {
-    geoMap = new GeoMap(0,0,height,height,thisApplet);
+    geoMap = new GeoMap(150,0,height,height,thisApplet);
     geoMap.readFile("GBR_adm2");
 
     textAlign(LEFT, BOTTOM);

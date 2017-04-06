@@ -63,8 +63,8 @@ void setup()
   townBG.resize(SCREENX, SCREENY);
   countyBG = loadImage("UnionFlag.png");
   countyBG.resize(SCREENX, SCREENY);
-  //aboutUsBG = loadImage("AboutUs.png");
-  //aboutUsBG.resize(SCREENX,SCREENY);
+  aboutUsBG = loadImage("AboutUs.png");
+  aboutUsBG.resize(SCREENX,SCREENY);
   gstq = minim.loadFile("gstq.mp3", 2048);
   search = "MIDDLESBROUGH";
   type = "Town";
