@@ -6,6 +6,8 @@ class Query
   String text;
   PropertyEntry entry;
   BarChart chart;
+  PieChart pChart;
+  
   Query(String search, String type)
   {
     if (!type.equals("All")) {
@@ -41,12 +43,15 @@ class Query
     {
       text(text, SCREENX / 2, SCREENY / 4);
     }
+    if(pChart!=null)
+    {
+      pChart.draw();
+    }
   }
   PropertyEntry getPropertyEntry() {
     String [] s = search.split("\\s*,\\s*");
     String [] tempArray = s[0].split(" ");
     if ((tempArray.length>1)&&(isStringInteger(tempArray[0]))) {
-
       db.query( "SELECT * FROM registry WHERE NumName = '"+ tempArray[1]+", "+ tempArray[0] +"' AND Street = '"+s[1]+"'");
     } else {
       db.query( "SELECT * FROM registry WHERE NumName = '" +s[0] +"' AND Street = '"+s[1]+"'");
@@ -70,9 +75,87 @@ class Query
     }
     return entry;
   }
+  ArrayList<PropertyEntry> getStreetEntries() {
+    ArrayList<PropertyEntry> tempList = new ArrayList<PropertyEntry>(); 
+    db.query( "SELECT * FROM registry WHERE Street = '"+search+"'");
+    while (db.next()) {
+      String [] temp = new String[11];
+      temp[0] = ""+db.getInt("Price");
+      temp[1] = db.getString("Date");
+      temp[2] = db.getString("Postcode");
+      temp[3] = db.getString("Type");
+      temp[4] = db.getString("OldNew");
+      temp[5] = db.getString("NumName");
+      temp[6] = db.getString("Street");
+      temp[7] = db.getString("Locality");
+      temp[8] = db.getString("Town");
+      temp[9] = db.getString("District");
+      temp[10] = db.getString("County");
+      entry = new PropertyEntry(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6], temp[7], temp[8], temp[9], temp[10]);
+      String test = entry.toString();
+      tempList.add(entry);
+      println(test);
+    }
+    return tempList;
+  }
+  
+  void displayAge() {
+    float[] data = new float[2];
+    data[0] = 0;
+    data[1] = 0;
+    String newlyBuilt = "Y";
+    db.query( "SELECT * FROM registry WHERE "+type+" = "+search);
+    while(db.next()) {
+      if(newlyBuilt.equals(db.getString("OldNew")))
+      {
+        data[0]++;
+      }
+      else
+      {
+        data[1]++;
+      }
+    }
+    pChart = new PieChart(200, 200, 200,data);
+  }
+  void displayHouseType() {
+    float[] data = new float[5];
+    for(int i=0;i<data.length;i++) {
+      data[i]=0;
+    }
+    String detached = "D";
+    String semiDetached = "S";
+    String terraced = "T";
+    String flats = "F";
+    String other = "O";
+    
+    db.query( "SELECT * FROM registry WHERE "+type+" = "+search);
+    while(db.next()) {
+      String houseType = db.getString("Type");
+      if(detached.equals(houseType))
+      {
+        data[0]++;
+      }
+      else if(semiDetached.equals(houseType))
+      {
+        data[1]++;
+      }
+      else if(terraced.equals(houseType))
+      {
+        data[2]++;
+      }
+      else if(flats.equals(houseType))
+      {
+        data[3]++;
+      }
+      else if(other.equals(houseType))
+      {
+        data[4]++;
+      }
+    }
+    pChart = new PieChart(400, 400, 200,data);
+  }
 
-
-
+  
   void displayTop(int numberToReturn) {
     db.query( "SELECT * FROM registry WHERE "+type+" = "+search+" ORDER BY Price DESC LIMIT "+numberToReturn );
     float [] temp = new float[numberToReturn];
