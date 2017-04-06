@@ -1,4 +1,4 @@
-import interfascia.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+import interfascia.*;
 import org.gicentre.utils.stat.*;
 import de.bezier.data.sql.*;
 import org.gicentre.geomap.*;
@@ -99,6 +99,9 @@ void setup()
 
   currentScreen = homeScreen;
   backList.add(currentScreen);
+  
+  Query test = new Query("CARDIFF","County");
+  test.displayPriceRange();
 }
 
 //

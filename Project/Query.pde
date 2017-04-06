@@ -39,7 +39,11 @@ class Query
     {
       chart.draw();
     }
-    else if(pChart!=null)
+    if (text != null)
+    {
+      text(text, SCREENX / 2, SCREENY / 4);
+    }
+    if (pChart!=null)
     {
       pChart.draw();
     }
@@ -47,8 +51,7 @@ class Query
     {
       println(pieChartWords);
       text(pieChartWords, 620, 400);
-    }
-   
+    } 
   }
   PropertyEntry getPropertyEntry() {
     String [] s = search.split("\\s*,\\s*");
@@ -100,28 +103,43 @@ class Query
     }
     return tempList;
   }
-  
+
+  void displayPriceRange() {
+    int increment = (int)(getMax()/10.0);
+    float [] priceRange = new float[10];
+    for (int i =0; i<10; i++) {
+      int bottomRange = (increment*(i));
+      int upperRange = (increment*(i+1/10));
+      db.query("SELECT COUNT(Price) FROM registry WHERE "+type+" = "+search+" AND Price> "+bottomRange + " and Price <= "+upperRange);
+      if(db.next())
+      {
+        priceRange[i] = db.getInt(1);
+        println(priceRange[i] );
+      }
+    }
+    histogramQuery = new Histogram(200, 200, 600, 360, priceRange, increment);
+  }
+
   void displayAge() {
     float[] data = new float[2];
     data[0] = 0;
     data[1] = 0;
     String newlyBuilt = "Y";
     db.query( "SELECT * FROM registry WHERE "+type+" = "+search);
-    while(db.next()) {
-      if(newlyBuilt.equals(db.getString("OldNew")))
+    while (db.next()) {
+      if (newlyBuilt.equals(db.getString("OldNew")))
       {
         data[0]++;
-      }
-      else
+      } else
       {
         data[1]++;
       }
     }
-    pChart = new PieChart(200, 200, 200,data);
+    pChart = new PieChart(200, 200, 200, data);
   }
   void displayHouseType() {
     float[] data = new float[5];
-    for(int i=0;i<data.length;i++) {
+    for (int i=0; i<data.length; i++) {
       data[i]=0;
     }
     String detached = "D";
@@ -129,27 +147,23 @@ class Query
     String terraced = "T";
     String flats = "F";
     String other = "O";
-    
+
     db.query( "SELECT * FROM registry WHERE "+type+" = "+search);
-    while(db.next()) {
+    while (db.next()) {
       String houseType = db.getString("Type");
-      if(detached.equals(houseType))
+      if (detached.equals(houseType))
       {
         data[0]++;
-      }
-      else if(semiDetached.equals(houseType))
+      } else if (semiDetached.equals(houseType))
       {
         data[1]++;
-      }
-      else if(terraced.equals(houseType))
+      } else if (terraced.equals(houseType))
       {
         data[2]++;
-      }
-      else if(flats.equals(houseType))
+      } else if (flats.equals(houseType))
       {
         data[3]++;
-      }
-      else if(other.equals(houseType))
+      } else if (other.equals(houseType))
       {
         data[4]++;
       }
@@ -178,8 +192,7 @@ class Query
     }
     chart = new BarChart(200, 200, 600, 360, temp);
   }
-  void displayBottom(int numberToReturn) 
-  {
+  void displayBottom(int numberToReturn) {
     db.query( "SELECT * FROM registry WHERE "+type+" = "+search+" ORDER BY Price ASC LIMIT "+numberToReturn );
     float [] temp = new float[numberToReturn];
     for (int i=0; i<numberToReturn; i++)
